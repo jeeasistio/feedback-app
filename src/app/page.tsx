@@ -1,7 +1,11 @@
+import { Button } from "@/components/Utils/Button"
+import { Typography } from "@/components/Utils/Typography"
+
 const Home = () => {
     return (
         <main>
-            <h1>My page</h1>
+            <Typography variant="h1">My Page</Typography>
+            <Button>Button</Button>
         </main>
     )
 }
