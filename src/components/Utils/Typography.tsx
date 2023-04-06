@@ -9,7 +9,7 @@ const h3ClassName =
 const h4ClassName =
     "text-[.813rem] sm:text-[.875rem] font-bold leading-[1.25rem] tracking-[-.013rem]"
 const body1ClassName =
-    "text-[.8125rem] sm:text-[1rem] font-semibold leading-[1.438rem]"
+    "text-[.8125rem] sm:text-[1rem] leading-[1.438rem]"
 const body2ClassName = "text-[.8125rem] sm:text-[.9375rem] leading-[1.375rem]"
 const body3ClassName = "text-[.688rem] font-semibold leading-[1.1875rem]"
 
@@ -48,14 +48,32 @@ const variantMapping = {
 
 interface Props {
     variant?: TypographyVariant
+    color?: string
     children?: ReactNode
+    className?: string
 }
 
-export const Typography = ({ variant = "body1", children }: Props) => {
+const textColor: Record<string, string> = {
+    primary: "text-primary",
+    secondary: "text-secondary",
+    inherit: "text-inherit",
+    white: "text-white",
+    indigo: "text-indigo",
+    red: "text-red",
+}
+
+export const Typography = ({
+    variant = "body1",
+    color = "indigo",
+    children,
+    className,
+}: Props) => {
     const Element = variantMapping[variant]
         .Element as keyof JSX.IntrinsicElements
     return (
-        <Element className={`font-sans ${variantMapping[variant].className}`}>
+        <Element
+            className={`font-sans ${variantMapping[variant].className} ${textColor[color]} ${className}`}
+        >
             {children}
         </Element>
     )

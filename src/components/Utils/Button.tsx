@@ -1,17 +1,29 @@
 import { ReactNode } from "react"
+import { Typography } from "./Typography"
 
 interface Props {
     color?: string
     children: ReactNode
+    link?: boolean
 }
 
-export const Button = ({ color = "primary", children }: Props) => {
-    const bgColor = `bg-${color}`
+const bgColor: Record<string, string> = {
+    primary: "bg-primary",
+}
+
+export const Button = ({
+    color = "primary",
+    children,
+    link = false,
+}: Props) => {
     return (
         <button
-            className={`${bgColor} rounded-lg px-12 py-2 font-sans text-[.813rem] font-bold leading-[1.25rem] tracking-[-.013rem] text-white hover:opacity-80 sm:text-[.875rem]`}
+            className={`${bgColor[color]} rounded-lg px-12 py-2 hover:opacity-80
+            ${link && "hover:underline hover:decoration-white"}`}
         >
-            {children}
+            <Typography variant="h4" color="white">
+                {children}
+            </Typography>
         </button>
     )
 }

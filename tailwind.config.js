@@ -18,9 +18,11 @@ module.exports = {
                 "white-100": "#F2F4FF",
                 "white-200": "#F7F8FD",
                 indigo: "#3A4374",
-                gray: "#647196",
+                "gray-100": "#647196",
+                "gray-200": "#CFD7FF",
                 orange: "#F49F85",
                 blue: "#62BCFA",
+                red: "#D73737",
             },
             fontFamily: {
                 sans: ["var(--font-jost)", "sans-serif"],
