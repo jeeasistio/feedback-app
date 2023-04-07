@@ -8,10 +8,9 @@ const h3ClassName =
     "text-[.813rem] sm:text-[1.125rem] font-bold leading-[1.625rem] tracking-[-.016rem]"
 const h4ClassName =
     "text-[.813rem] sm:text-[.875rem] font-bold leading-[1.25rem] tracking-[-.013rem]"
-const body1ClassName =
-    "text-[.8125rem] sm:text-[1rem] leading-[1.438rem]"
+const body1ClassName = "text-[.8125rem] sm:text-[1rem] leading-[1.438rem]"
 const body2ClassName = "text-[.8125rem] sm:text-[.9375rem] leading-[1.375rem]"
-const body3ClassName = "text-[.688rem] font-semibold leading-[1.1875rem]"
+const body3ClassName = "text-[.8125rem] font-semibold leading-[1.1875rem]"
 
 type TypographyVariant = "h1" | "h2" | "h3" | "h4" | "body1" | "body2" | "body3"
 

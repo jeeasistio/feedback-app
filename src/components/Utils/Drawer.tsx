@@ -1,15 +1,15 @@
 "use client"
 
 import { useClickOutside } from "@/hooks/useClickOutside"
+import { useSidebar } from "@/hooks/useSidebar"
 import { ReactNode, useEffect, useRef } from "react"
 
 interface Props {
-    open: boolean
-    handleClose: () => void
     children: ReactNode
 }
 
-export const Drawer = ({ open, children, handleClose }: Props) => {
+export const Drawer = ({ children }: Props) => {
+    const { open, handleClose } = useSidebar()
     const ref = useRef<HTMLDivElement>(null)
     useClickOutside(ref, () => handleClose())
     useEffect(() => {

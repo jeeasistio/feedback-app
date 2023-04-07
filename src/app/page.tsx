@@ -1,30 +1,31 @@
 "use client"
 
-import { CategoryFilter } from "@/components/CategoryFilter"
+import { TagFilter } from "@/components/TagFilter"
 import { FrontendMentor } from "@/components/FrontendMentor"
 import { RoadmapPreview } from "@/components/RoadmapPreview"
 import { Drawer } from "@/components/Utils/Drawer"
-import { useState } from "react"
+import { SidebarProvider } from "@/contexts/sidebar"
+import { TAGS } from "@/lib/tag"
+import { TagProvider } from "@/contexts/tags"
 
-const categories = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"]
 const roadmap = { planned: 3, in_progress: 2, live: 1 }
 
 const Home = () => {
-    const [open, setOpen] = useState(false)
-
     return (
         <main>
-            <FrontendMentor
-                open={open}
-                handleOpen={() => setOpen(true)}
-                handleClose={() => setOpen(false)}
-            />
-            <div className="relative">
-                <Drawer open={open} handleClose={() => setOpen(false)}>
-                    <CategoryFilter categories={categories} />
-                    <RoadmapPreview roadmap={roadmap} />
-                </Drawer>
-            </div>
+            <TagProvider>
+                <SidebarProvider>
+                    <FrontendMentor />
+                    <div className="relative">
+                        <Drawer>
+                            <TagFilter tags={TAGS} />
+                            <RoadmapPreview roadmap={roadmap} />
+                        </Drawer>
+                    </div>
+                </SidebarProvider>
+                <TagFilter tags={TAGS} />
+                <RoadmapPreview roadmap={roadmap} />
+            </TagProvider>
         </main>
     )
 }
