@@ -3,12 +3,14 @@
 import { useRef, useState } from "react"
 import { Typography } from "./Typography"
 import { useClickOutside } from "@/hooks/useClickOutside"
+import Image from "next/image"
 
 interface Props {
     options: string[]
+    label: string
 }
 
-export const CustomDropdown = ({ options }: Props) => {
+export const CustomDropdown = ({ options, label }: Props) => {
     const [open, setOpen] = useState(false)
     const [selected, setSelected] = useState(options[0])
     const ref = useRef<HTMLDivElement>(null)
@@ -26,17 +28,23 @@ export const CustomDropdown = ({ options }: Props) => {
                 onClick={handleOpen}
                 className="w-full rounded-lg bg-indigo px-4 py-6"
             >
-                <div className="flex">
+                <div className="flex items-center gap-2">
                     <Typography
                         variant="h4"
                         color="white"
                         className="font-normal"
                     >
-                        Sort by :&nbsp;
+                        {label} :
                     </Typography>
                     <Typography variant="h4" color="white">
                         {selected}
                     </Typography>
+                    <Image
+                        src="/shared/icon-arrow-down-white.svg"
+                        alt="arrow-down-icon"
+                        width={12}
+                        height={6}
+                    />
                 </div>
             </button>
 

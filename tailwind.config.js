@@ -27,6 +27,9 @@ module.exports = {
             fontFamily: {
                 sans: ["var(--font-jost)", "sans-serif"],
             },
+            container: {
+                center: true,
+            },
         },
     },
     plugins: [],

@@ -1,16 +1,26 @@
 import { useSidebar } from "@/hooks/useSidebar"
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid"
+import Image from "next/image"
 
 export const NavButton = () => {
     const { open, handleOpen, handleClose } = useSidebar()
 
     return open ? (
         <button onClick={handleClose}>
-            <XMarkIcon className="h-8 w-8 text-white" />
+            <Image
+                src="/shared/mobile/icon-close.svg"
+                alt="close-icon"
+                width={16}
+                height={16}
+            />
         </button>
     ) : (
         <button onClick={handleOpen}>
-            <Bars3Icon className="h-8 w-8 text-white" />
+            <Image
+                src="/shared/mobile/icon-hamburger.svg"
+                alt="menu-icon"
+                width={20}
+                height={17}
+            />
         </button>
     )
 }

@@ -29,9 +29,9 @@ const bgColor: Record<string, string> = {
 
 export const RoadmapPreview = ({ roadmap }: Props) => {
     return (
-        <div className="flex flex-wrap items-center gap-2 rounded-lg bg-white p-4">
+        <div className="flex flex-wrap items-center gap-2 rounded-lg bg-white p-4 sm:h-full">
             <div className="w-full">
-                <div className="flex items-center justify-between">
+                <div className="mb-5 flex items-center justify-between">
                     <Typography variant="h3">Roadmap</Typography>
                     <Typography
                         variant="body3"
@@ -42,11 +42,11 @@ export const RoadmapPreview = ({ roadmap }: Props) => {
                     </Typography>
                 </div>
 
-                <div>
+                <div className="space-y-2">
                     {Object.entries(roadmap).map(([key, value]) => (
                         <div
                             key={key}
-                            className="flex items-center justify-between gap-2"
+                            className="flex items-center justify-between"
                         >
                             <div key={key} className="flex items-center gap-2">
                                 <div

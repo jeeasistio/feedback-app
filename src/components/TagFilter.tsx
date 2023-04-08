@@ -9,17 +9,19 @@ export const TagFilter = ({ tags }: Props) => {
     const { activeTag, handleChange } = useTag()
 
     return (
-        <div className="flex flex-wrap items-center gap-2 rounded-lg bg-white p-4">
-            {tags.map((tag) => (
-                <CustomCheckbox
-                    key={tag}
-                    textColor="secondary"
-                    onClick={() => handleChange(tag)}
-                    active={activeTag === tag}
-                >
-                    {tag}
-                </CustomCheckbox>
-            ))}
+        <div className="rounded-lg bg-white p-4 sm:h-full">
+            <div className="flex flex-wrap items-start gap-4">
+                {tags.map((tag) => (
+                    <CustomCheckbox
+                        key={tag}
+                        textColor="secondary"
+                        onClick={() => handleChange(tag)}
+                        active={activeTag === tag}
+                    >
+                        {tag}
+                    </CustomCheckbox>
+                ))}
+            </div>
         </div>
     )
 }
