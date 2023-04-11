@@ -29,7 +29,7 @@ const bgColor: Record<string, string> = {
 
 export const RoadmapPreview = ({ roadmap }: Props) => {
     return (
-        <div className="flex flex-wrap items-center gap-2 rounded-lg bg-white p-4 sm:max-lg:h-full">
+        <div className="flex flex-wrap items-center gap-2 rounded-xl bg-white p-4 sm:max-lg:h-full">
             <div className="w-full">
                 <div className="mb-5 flex items-center justify-between">
                     <Typography variant="h3">Roadmap</Typography>

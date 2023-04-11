@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { UpvoteButton } from "./UpvoteButton"
 import { Typography } from "./Utils/Typography"
@@ -20,15 +22,17 @@ export const SuggestionCard = ({
     upvotes,
 }: Props) => {
     return (
-        <div className="grid grid-cols-12 gap-3 rounded-xl bg-white p-8">
+        <div className="grid grid-cols-12 gap-3 rounded-xl bg-white p-6 sm:p-8">
             <div className="col-span-12 sm:col-span-10 sm:ml-8">
                 <Typography variant="h3">{title}</Typography>
-                <Typography className="mb-1 sm:mb-4">{description}</Typography>
+                <Typography className="mb-1 sm:mb-4" color="gray">
+                    {description}
+                </Typography>
                 <Category interactive={false} textColor="secondary">
                     {CATEGORYMAPPING[category].title}
                 </Category>
             </div>
-            <div className="col-span-1 sm:order-first">
+            <div className="col-span-3 sm:order-first sm:col-span-1">
                 <UpvoteButton
                     active={true}
                     count={upvotes}

@@ -22,7 +22,9 @@ export const Category = ({
     return (
         <Element
             onClick={onClick}
-            className={`flex w-min cursor-pointer flex-col items-center gap-1 rounded-lg px-4 py-1 hover:bg-gray-200 
+            className={`hover:bg-gray-200 flex w-min ${
+                interactive ? "cursor-pointer" : "cursor-auto"
+            } flex-col items-center gap-1 rounded-lg px-4 py-1 
             ${active ? "bg-secondary" : "bg-white-100"}`}
         >
             <Typography variant="body3" color={active ? "white" : textColor}>

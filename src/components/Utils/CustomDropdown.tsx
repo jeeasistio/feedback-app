@@ -26,7 +26,7 @@ export const CustomDropdown = ({ options, label }: Props) => {
         <div className="relative w-max min-w-[12rem]" ref={ref}>
             <button
                 onClick={handleOpen}
-                className="w-full rounded-lg bg-indigo px-4 py-6"
+                className="w-full rounded-xl bg-tertiary px-4 py-6"
             >
                 <div className="flex items-center gap-2">
                     <Typography
@@ -49,7 +49,7 @@ export const CustomDropdown = ({ options, label }: Props) => {
             </button>
 
             {open && (
-                <ul className=" absolute top-[calc(100%+0.8rem)] flex w-[110%] cursor-pointer flex-col divide-y rounded-lg bg-white drop-shadow-xl">
+                <ul className=" absolute top-[calc(100%+0.8rem)] flex w-[110%] cursor-pointer flex-col divide-y divide-indigo divide-opacity-20 rounded-lg bg-white drop-shadow-xl">
                     {options.map((option) => (
                         <li
                             className="px-4 py-2 text-left text-indigo hover:text-primary"

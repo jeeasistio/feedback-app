@@ -12,6 +12,13 @@ import { SuggestionCard } from "@/components/SuggestionCard"
 import { NoFeedback } from "@/components/NoFeedback"
 
 const roadmap = { planned: 3, in_progress: 2, live: 1 }
+const suggestion = {
+    title: "Add tags for solutions",
+    category: "enhancement",
+    upvotes: 112,
+    numComments: 2,
+    description: "Easier to search for solutions based on a specific stack.",
+}
 
 const Home = () => {
     return (
@@ -46,13 +53,7 @@ const Home = () => {
                             <SuggestionActions />
                         </div>
                         <div className="mb-6 px-4 sm:px-0">
-                            {/* <SuggestionCard
-                                title="Add tags for solutions"
-                                category="enhancement"
-                                upvotes={112}
-                                numComments={2}
-                                description="Easier to search for solutions based on a specific stack."
-                            /> */}
+                            <SuggestionCard {...suggestion} />
                             <NoFeedback />
                         </div>
                     </div>

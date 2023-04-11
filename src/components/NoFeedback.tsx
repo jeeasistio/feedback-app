@@ -14,7 +14,7 @@ export const NoFeedback = () => {
                 />
             </div>
             <Typography variant="h3">There is no feedback yet</Typography>
-            <Typography className="mb-4 max-w-[410px]">
+            <Typography className="mb-4 max-w-[410px]" color="gray">
                 Got a suggestion? Found a bug that needs to be squashed? We love
                 hearing about new ideas to improve our app.
             </Typography>

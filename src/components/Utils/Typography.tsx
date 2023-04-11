@@ -57,6 +57,7 @@ const textColor: Record<string, string> = {
     secondary: "text-secondary",
     inherit: "text-inherit",
     white: "text-white",
+    gray: "text-gray",
     indigo: "text-indigo",
     red: "text-red",
 }

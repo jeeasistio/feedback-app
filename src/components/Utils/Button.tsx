@@ -8,8 +8,22 @@ interface Props {
     startIcon?: ReactNode
 }
 
-const bgColor: Record<string, string> = {
-    primary: "bg-primary",
+const buttonMapping: Record<
+    string,
+    { background: string; contrastText: string }
+> = {
+    primary: {
+        background: "bg-primary",
+        contrastText: "white",
+    },
+    secondary: {
+        background: "bg-secondary",
+        contrastText: "white",
+    },
+    "white-200": {
+        background: "bg-white-200",
+        contrastText: "gray",
+    },
 }
 
 export const Button = ({
@@ -20,11 +34,13 @@ export const Button = ({
 }: Props) => {
     return (
         <button
-            className={`${bgColor[color]} rounded-lg px-6 py-3 hover:opacity-80
+            className={`${
+                buttonMapping[color].background
+            } flex items-center gap-4 rounded-lg px-6 py-3 hover:opacity-80
             ${link && "hover:underline hover:decoration-white"}`}
         >
             {startIcon}
-            <Typography variant="h4" color="white">
+            <Typography variant="h4" color={buttonMapping[color].contrastText}>
                 {children}
             </Typography>
         </button>
