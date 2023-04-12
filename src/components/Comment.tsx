@@ -29,7 +29,7 @@ export const Comment = ({ user, content, replies }: Props) => {
                 <div className="col-span-1 mx-auto h-3/5 w-[1px] bg-gray opacity-10" />
                 <div className="col-span-11">
                     {replies?.map((reply, i) => (
-                        <div className="my-4 sm:mb-8" key={i}>
+                        <div className="mb-6" key={i}>
                             <CommentContent
                                 {...reply}
                                 replyingTo={reply.replyingTo}

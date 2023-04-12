@@ -1,5 +1,3 @@
-"use client"
-
 import { useRef, useState } from "react"
 import { Typography } from "./Typography"
 import { useClickOutside } from "@/hooks/useClickOutside"
@@ -49,7 +47,7 @@ export const CustomDropdown = ({ options, label }: Props) => {
             </button>
 
             {open && (
-                <ul className=" absolute top-[calc(100%+0.8rem)] flex w-[110%] cursor-pointer flex-col divide-y divide-indigo divide-opacity-20 rounded-lg bg-white drop-shadow-xl">
+                <ul className=" absolute top-[calc(100%+0.8rem)] flex w-[110%] cursor-pointer flex-col divide-y divide-indigo divide-opacity-20 rounded-xl bg-white drop-shadow-xl">
                     {options.map((option) => (
                         <li
                             className="px-4 py-2 text-left text-indigo hover:text-primary"

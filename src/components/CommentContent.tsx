@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Typography } from "./Utils/Typography"
 import { ReplyButton } from "./ReplyButton"
+import { ReplyForm } from "./ReplyForm"
 
 interface Props {
     content: string
@@ -16,7 +17,7 @@ export const CommentContent = ({ content, user, replyingTo }: Props) => {
     return (
         <div className="grid grid-cols-12 items-center space-y-1 sm:space-y-2">
             <Image
-                className="col-span-2 rounded-full"
+                className="col-span-2 rounded-full sm:col-span-1"
                 src={user.image}
                 alt="profile-image"
                 width={40}
@@ -42,6 +43,10 @@ export const CommentContent = ({ content, user, replyingTo }: Props) => {
 
                     {content}
                 </Typography>
+
+                <div className="mt-4">
+                    <ReplyForm />
+                </div>
             </div>
         </div>
     )

@@ -1,5 +1,3 @@
-"use client"
-
 import { ReactNode, createContext, useState } from "react"
 
 interface SidebarContext {

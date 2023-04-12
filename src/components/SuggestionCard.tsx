@@ -23,9 +23,11 @@ export const SuggestionCard = ({
 }: Props) => {
     return (
         <div className="grid grid-cols-12 gap-3 rounded-xl bg-white p-6 sm:p-8">
-            <div className="col-span-12 sm:col-span-10 sm:ml-8">
-                <Typography variant="h3">{title}</Typography>
-                <Typography className="mb-1 sm:mb-4" color="gray">
+            <div className="col-span-12 sm:col-span-10 sm:max-lg:ml-4">
+                <Typography variant="h3" className="mb-2">
+                    {title}
+                </Typography>
+                <Typography className="mb-2 sm:mb-4" color="gray">
                     {description}
                 </Typography>
                 <Category interactive={false} textColor="secondary">

@@ -1,5 +1,3 @@
-"use client"
-
 import { useRef, useState } from "react"
 import { Typography } from "../Typography"
 import { useClickOutside } from "@/hooks/useClickOutside"
@@ -38,7 +36,7 @@ export const Select = ({ options }: Props) => {
             </button>
 
             {open && (
-                <ul className=" absolute top-[100%] flex w-full cursor-pointer flex-col divide-y rounded-lg bg-white drop-shadow-xl">
+                <ul className=" absolute top-[100%] flex w-full cursor-pointer flex-col divide-y rounded-xl bg-white drop-shadow-xl">
                     {options.map((option) => (
                         <li
                             className="px-4 py-2 text-left text-indigo hover:text-primary"

@@ -5,6 +5,7 @@ export const DetailActions = () => {
     return (
         <div className="flex items-center justify-between px-4">
             <Button
+                link
                 startIcon={
                     <Image
                         src="/shared/icon-arrow-left.svg"
@@ -13,7 +14,7 @@ export const DetailActions = () => {
                         height={4}
                     />
                 }
-                color="white-200"
+                color="gray"
             >
                 Go Back
             </Button>

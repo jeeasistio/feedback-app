@@ -22,7 +22,7 @@ const suggestion = {
 
 const Home = () => {
     return (
-        <main className="sm:mt-4">
+        <main className="sm:my-8">
             <CategoryProvider>
                 <div className="grid-cols-10 gap-6 lg:grid">
                     <div className="col-span-2 grid-cols-3 gap-4 sm:max-lg:mb-8 sm:max-lg:grid lg:grid-cols-1 lg:space-y-6">
@@ -52,9 +52,9 @@ const Home = () => {
                         <div className="mb-6">
                             <SuggestionActions />
                         </div>
-                        <div className="mb-6 px-4 sm:px-0">
+                        <div className="px-4 sm:px-0">
                             <SuggestionCard {...suggestion} />
-                            <NoFeedback />
+                            {/* <NoFeedback /> */}
                         </div>
                     </div>
                 </div>

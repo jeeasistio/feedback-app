@@ -1,3 +1,4 @@
+import { AddCommentForm } from "@/components/AddCommentForm"
 import { Comments } from "@/components/Comments"
 import { DetailActions } from "@/components/DetailActions"
 import { SuggestionCard } from "@/components/SuggestionCard"
@@ -12,17 +13,19 @@ const suggestion = {
 
 const Detail = async () => {
     return (
-        <main className="space-y-6">
+        <main className="my-8 space-y-6 px-4">
             <div>
                 <DetailActions />
             </div>
-            <div className="px-4">
+            <div>
                 <SuggestionCard {...suggestion} />
             </div>
-            <div className="px-4">
+            <div>
                 <Comments />
             </div>
-            <div>Add Comment Form</div>
+            <div>
+                <AddCommentForm />
+            </div>
         </main>
     )
 }

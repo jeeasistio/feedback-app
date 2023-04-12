@@ -36,7 +36,7 @@ export const RoadmapPreview = ({ roadmap }: Props) => {
                     <Typography
                         variant="body3"
                         color="secondary"
-                        className="w-min underline hover:decoration-2"
+                        className="w-min underline"
                     >
                         <Link href="#">View</Link>
                     </Typography>
