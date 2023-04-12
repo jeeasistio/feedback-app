@@ -1,6 +1,5 @@
 import Image from "next/image"
-import { Typography } from "./Utils/Typography"
-import { ReplyButton } from "./ReplyButton"
+import { Typography } from "../Utils/Typography"
 import { ReplyForm } from "./ReplyForm"
 
 interface Props {
@@ -30,7 +29,11 @@ export const CommentContent = ({ content, user, replyingTo }: Props) => {
                 </Typography>
             </div>
             <div className="col-span-2 ml-auto sm:col-span-1">
-                <ReplyButton />
+                <button className="decoration-secondary hover:underline">
+                    <Typography variant="body3" color="secondary">
+                        Reply
+                    </Typography>
+                </button>
             </div>
             <div className="sm:col-span-1" />
             <div className="col-span-12 sm:col-span-11 sm:ml-4 lg:ml-0">

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { Typography } from "../Typography"
+import { Typography } from "../Utils/Typography"
 import { useClickOutside } from "@/hooks/useClickOutside"
 
 interface Props {

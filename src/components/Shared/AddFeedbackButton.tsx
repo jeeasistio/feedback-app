@@ -1,6 +1,6 @@
-import { Button } from "./Utils/Button"
+import { Button } from "../Utils/Button"
 
-export const AddFeedback = () => {
+export const AddFeedbackButton = () => {
     return (
         <div>
             <Button color="primary">+ Add Feedback</Button>

@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { Typography } from "./Utils/Typography"
-import { AddFeedback } from "./AddFeedback"
+import { Typography } from "../Utils/Typography"
+import { AddFeedbackButton } from "./AddFeedbackButton"
 
 export const NoFeedback = () => {
     return (
@@ -18,7 +18,7 @@ export const NoFeedback = () => {
                 Got a suggestion? Found a bug that needs to be squashed? We love
                 hearing about new ideas to improve our app.
             </Typography>
-            <AddFeedback />
+            <AddFeedbackButton />
         </div>
     )
 }

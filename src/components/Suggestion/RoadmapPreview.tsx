@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Typography } from "./Utils/Typography"
+import { Typography } from "../Utils/Typography"
 
 interface Props {
     roadmap: Record<string, number>

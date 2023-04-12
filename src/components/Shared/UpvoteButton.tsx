@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Typography } from "./Utils/Typography"
+import { Typography } from "../Utils/Typography"
 
 interface Props {
     count: number

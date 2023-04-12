@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Typography } from "./Typography"
+import { Typography } from "../Utils/Typography"
 
 interface Props {
     interactive?: boolean

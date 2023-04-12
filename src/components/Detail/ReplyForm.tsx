@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "./Utils/Button"
-import { TextField } from "./Utils/Form/TextField"
+import { Button } from "../Utils/Button"
+import { TextField } from "../Form/TextField"
 
 export const ReplyForm = () => {
     return (

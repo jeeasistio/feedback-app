@@ -1,22 +1,22 @@
 "use client"
 
-import { CategoryFilter } from "@/components/CategoryFilter"
-import { FrontendMentor } from "@/components/FrontendMentor"
-import { RoadmapPreview } from "@/components/RoadmapPreview"
+import { CategoryFilter } from "@/components/Suggestion/CategoryFilter"
+import { FrontendMentor } from "@/components/Suggestion/FrontendMentor"
+import { RoadmapPreview } from "@/components/Suggestion/RoadmapPreview"
 import { Drawer } from "@/components/Utils/Drawer"
 import { SidebarProvider } from "@/contexts/sidebar"
 import { CATEGORIES } from "@/lib/category"
 import { CategoryProvider } from "@/contexts/categories"
-import { SuggestionActions } from "@/components/SuggestionActions"
-import { SuggestionCard } from "@/components/SuggestionCard"
-import { NoFeedback } from "@/components/NoFeedback"
+import { SuggestionActions } from "@/components/Suggestion/SuggestionActions"
+import { SuggestionCard } from "@/components/Shared/SuggestionCard"
+import { NoFeedback } from "@/components/Shared/NoFeedback"
 
 const roadmap = { planned: 3, in_progress: 2, live: 1 }
 const suggestion = {
     title: "Add tags for solutions",
     category: "enhancement",
     upvotes: 112,
-    numComments: 2,
+    commentsCount: 2,
     description: "Easier to search for solutions based on a specific stack.",
 }
 

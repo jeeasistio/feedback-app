@@ -1,24 +1,24 @@
 "use client"
 
-import Image from "next/image"
 import { UpvoteButton } from "./UpvoteButton"
-import { Typography } from "./Utils/Typography"
-import { Category } from "./Utils/Category"
+import { Typography } from "../Utils/Typography"
+import { Category } from "./Category"
 import { CATEGORYMAPPING } from "@/lib/category"
+import { CommentCount } from "./CommentCount"
 
 interface Props {
     title: string
     description: string
     category: string
     upvotes: number
-    numComments: number
+    commentsCount: number
 }
 
 export const SuggestionCard = ({
     title,
     description,
     category,
-    numComments,
+    commentsCount,
     upvotes,
 }: Props) => {
     return (
@@ -42,13 +42,7 @@ export const SuggestionCard = ({
                 />
             </div>
             <div className="col-span-9 flex items-center justify-end gap-2 sm:col-span-1">
-                <Image
-                    src="/shared/icon-comments.svg"
-                    alt="comments-icon"
-                    width={18}
-                    height={16}
-                />
-                <Typography className="font-bold">{numComments}</Typography>
+                <CommentCount count={commentsCount} />
             </div>
         </div>
     )

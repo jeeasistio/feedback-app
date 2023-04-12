@@ -1,13 +1,13 @@
-import { AddCommentForm } from "@/components/AddCommentForm"
-import { Comments } from "@/components/Comments"
-import { DetailActions } from "@/components/DetailActions"
-import { SuggestionCard } from "@/components/SuggestionCard"
+import { AddCommentForm } from "@/components/Detail/AddCommentForm"
+import { Comments } from "@/components/Detail/Comments"
+import { DetailActions } from "@/components/Detail/DetailActions"
+import { SuggestionCard } from "@/components/Shared/SuggestionCard"
 
 const suggestion = {
     title: "Add tags for solutions",
     category: "enhancement",
     upvotes: 112,
-    numComments: 2,
+    commentsCount: 2,
     description: "Easier to search for solutions based on a specific stack.",
 }
 

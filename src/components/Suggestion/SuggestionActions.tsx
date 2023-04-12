@@ -1,4 +1,4 @@
-import { AddFeedback } from "./AddFeedback"
+import { AddFeedbackButton } from "../Shared/AddFeedbackButton"
 import { SortDropdown } from "./SortDropdown"
 import { SuggestionCount } from "./SuggestionCount"
 
@@ -9,7 +9,7 @@ export const SuggestionActions = () => {
                 <SuggestionCount />
                 <SortDropdown />
             </div>
-            <AddFeedback />
+            <AddFeedbackButton />
         </div>
     )
 }

@@ -1,7 +1,14 @@
+import { GoBackButton } from "@/components/Shared/GoBackButton"
+
 const New = () => {
     return (
-        <main>
-            <h1>New</h1>
+        <main className="my-8 space-y-6 px-4">
+            <div>
+                <GoBackButton />
+            </div>
+            <div>
+                <NewFeedbackForm />
+            </div>
         </main>
     )
 }

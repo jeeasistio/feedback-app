@@ -8,7 +8,7 @@ interface Props {
     label: string
 }
 
-export const CustomDropdown = ({ options, label }: Props) => {
+export const Dropdown = ({ options, label }: Props) => {
     const [open, setOpen] = useState(false)
     const [selected, setSelected] = useState(options[0])
     const ref = useRef<HTMLDivElement>(null)

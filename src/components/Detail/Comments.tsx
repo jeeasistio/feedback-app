@@ -1,5 +1,5 @@
 import { Comment } from "./Comment"
-import { Typography } from "./Utils/Typography"
+import { Typography } from "../Utils/Typography"
 
 const comments = [
     {

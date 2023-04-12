@@ -1,5 +1,5 @@
 import { useCategory } from "@/hooks/useCategory"
-import { Category } from "./Utils/Category"
+import { Category } from "../Shared/Category"
 
 interface Props {
     categories: string[]

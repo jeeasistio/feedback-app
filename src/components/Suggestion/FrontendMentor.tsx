@@ -1,4 +1,4 @@
-import { Typography } from "./Utils/Typography"
+import { Typography } from "../Utils/Typography"
 import { NavButton } from "./NavButton"
 
 export const FrontendMentor = () => {

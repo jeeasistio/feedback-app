@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react"
-import { Typography } from "../Typography"
+import { Typography } from "../Utils/Typography"
 
 interface Props {
     value: string
