@@ -4,18 +4,26 @@ import { CATEGORIES } from "@/lib/category"
 import { Select } from "../Form/Select"
 import { TextField } from "../Form/TextField"
 import { Typography } from "../Utils/Typography"
-import { NewFeedbackActions } from "./NewFeedbackActions"
 import Image from "next/image"
 import { FeedbackField } from "../Shared/FeedbackField"
+import { EditFeedbackActions } from "./EditFeedbackActions"
 
-export const NewFeedbackForm = () => {
+const feedback = {
+    title: "Add tags for solutions",
+    category: "enhancement",
+    description: "Easier to search for solutions based on a specific stack.",
+}
+
+export const EditFeedbackForm = () => {
     return (
         <div className="relative mt-10 space-y-6 rounded-xl bg-white p-6 pt-12">
-            <Typography variant="h3">Create New Feedback</Typography>
+            <Typography variant="h3">
+                Editing {`'${feedback.title}'`}
+            </Typography>
 
             <div className="absolute -top-6 -translate-y-1/2">
                 <Image
-                    src="/shared/icon-new-feedback.svg"
+                    src="/shared/icon-edit-feedback.svg"
                     alt="plus-icon"
                     width={40}
                     height={40}
@@ -30,7 +38,7 @@ export const NewFeedbackForm = () => {
                         <TextField
                             fullWidth
                             placeholder="Type your description here"
-                            value="123"
+                            value={feedback.title}
                             onChange={() => {}}
                         />
                     }
@@ -54,6 +62,21 @@ export const NewFeedbackForm = () => {
 
             <div>
                 <FeedbackField
+                    title="Update Status"
+                    description="Change feedback state"
+                    input={
+                        <Select
+                            fullWidth
+                            value="All"
+                            onChange={() => {}}
+                            options={CATEGORIES}
+                        />
+                    }
+                />
+            </div>
+
+            <div>
+                <FeedbackField
                     title="Feedback Title"
                     description="Add a short, descriptive headline"
                     input={
@@ -61,7 +84,7 @@ export const NewFeedbackForm = () => {
                             fullWidth
                             multiline
                             placeholder="Type your description here"
-                            value="123"
+                            value={feedback.description}
                             onChange={() => {}}
                         />
                     }
@@ -69,7 +92,7 @@ export const NewFeedbackForm = () => {
             </div>
 
             <div>
-                <NewFeedbackActions />
+                <EditFeedbackActions />
             </div>
         </div>
     )

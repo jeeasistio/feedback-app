@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from "react"
 import { Typography } from "../Utils/Typography"
 
-interface Props {
+export interface Props {
     value: string
     onChange: ChangeEventHandler<HTMLTextAreaElement> &
         ChangeEventHandler<HTMLInputElement>
@@ -27,7 +27,7 @@ export const TextField = ({
     return (
         <>
             <Element
-                className={`rounded-lg border bg-white-200 px-6 py-4 outline-none focus:border-secondary 
+                className={`rounded-md border bg-white-200 px-5 py-2 text-indigo outline-none  focus:border-secondary
                 ${fullWidth && "w-full"}
                 ${error ? "border-red" : "border-transparent"} 
                 ${multiline && "resize-none"}

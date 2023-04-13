@@ -14,7 +14,7 @@ interface Props {
     commentsCount: number
 }
 
-export const SuggestionCard = ({
+export const FeedbackCard = ({
     title,
     description,
     category,

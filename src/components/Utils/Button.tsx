@@ -23,6 +23,11 @@ const buttonMapping: Record<
         contrastText: "white",
         underlineColor: "hover:decoration-secondary",
     },
+    indigo: {
+        background: "bg-indigo",
+        contrastText: "white",
+        underlineColor: "hover:decoration-white",
+    },
     gray: {
         background: "bg-white-200",
         contrastText: "gray",

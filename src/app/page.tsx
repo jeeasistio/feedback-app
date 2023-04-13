@@ -7,12 +7,12 @@ import { Drawer } from "@/components/Utils/Drawer"
 import { SidebarProvider } from "@/contexts/sidebar"
 import { CATEGORIES } from "@/lib/category"
 import { CategoryProvider } from "@/contexts/categories"
-import { SuggestionActions } from "@/components/Suggestion/SuggestionActions"
-import { SuggestionCard } from "@/components/Shared/SuggestionCard"
+import { FeedbackActions } from "@/components/Suggestion/FeedbackActions"
+import { FeedbackCard } from "@/components/Shared/FeedbackCard"
 import { NoFeedback } from "@/components/Shared/NoFeedback"
 
 const roadmap = { planned: 3, in_progress: 2, live: 1 }
-const suggestion = {
+const feedback = {
     title: "Add tags for solutions",
     category: "enhancement",
     upvotes: 112,
@@ -22,7 +22,7 @@ const suggestion = {
 
 const Home = () => {
     return (
-        <main className="sm:my-8">
+        <main className="container max-w-screen-xl sm:my-8 sm:px-4">
             <CategoryProvider>
                 <div className="grid-cols-10 gap-6 lg:grid">
                     <div className="col-span-2 grid-cols-3 gap-4 sm:max-lg:mb-8 sm:max-lg:grid lg:grid-cols-1 lg:space-y-6">
@@ -50,10 +50,10 @@ const Home = () => {
                     </div>
                     <div className="lg:col-span-8">
                         <div className="mb-6">
-                            <SuggestionActions />
+                            <FeedbackActions />
                         </div>
                         <div className="px-4 sm:px-0">
-                            <SuggestionCard {...suggestion} />
+                            <FeedbackCard {...feedback} />
                             {/* <NoFeedback /> */}
                         </div>
                     </div>

@@ -22,9 +22,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={`${jost.variable}`}>
-            <body>
-                <div className="md:container sm:px-4">{children}</div>
-            </body>
+            <body>{children}</body>
         </html>
     )
 }
