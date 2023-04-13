@@ -48,7 +48,7 @@ const comments = [
 
 export const Comments = () => {
     return (
-        <div className="sm: rounded-xl bg-white px-6 py-4 sm:px-8 sm:py-8">
+        <div className="sm: rounded-xl bg-white px-6 py-4 sm:p-8">
             <Typography variant="h3">
                 {comments.length} {comments.length > 1 ? "Comments" : "Comment"}
             </Typography>

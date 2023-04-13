@@ -37,12 +37,21 @@ export const Dropdown = ({ options, label }: Props) => {
                     <Typography variant="h4" color="white">
                         {selected}
                     </Typography>
-                    <Image
-                        src="/shared/icon-arrow-down-white.svg"
-                        alt="arrow-down-icon"
-                        width={12}
-                        height={6}
-                    />
+                    {open ? (
+                        <Image
+                            src="/shared/icon-arrow-up-white.svg"
+                            alt="arrow-up-icon"
+                            width={12}
+                            height={6}
+                        />
+                    ) : (
+                        <Image
+                            src="/shared/icon-arrow-down-white.svg"
+                            alt="arrow-down-icon"
+                            width={12}
+                            height={6}
+                        />
+                    )}
                 </div>
             </button>
 
@@ -50,11 +59,19 @@ export const Dropdown = ({ options, label }: Props) => {
                 <ul className=" absolute top-[calc(100%+0.8rem)] flex w-[110%] cursor-pointer flex-col divide-y divide-indigo divide-opacity-20 rounded-xl bg-white drop-shadow-xl">
                     {options.map((option) => (
                         <li
-                            className="px-4 py-2 text-left text-gray hover:text-primary"
+                            className="flex items-center justify-between px-4 py-2 text-left text-gray hover:text-primary"
                             onClick={() => handleSelect(option)}
                             key={option}
                         >
                             <Typography color="inherit">{option}</Typography>
+                            {option === selected && (
+                                <Image
+                                    src="/shared/icon-check.svg"
+                                    alt="check-icon"
+                                    width={11}
+                                    height={7}
+                                />
+                            )}
                         </li>
                     ))}
                 </ul>

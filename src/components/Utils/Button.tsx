@@ -33,6 +33,11 @@ const buttonMapping: Record<
         contrastText: "gray",
         underlineColor: "hover:decoration-gray",
     },
+    red: {
+        background: "bg-red",
+        contrastText: "white",
+        underlineColor: "hover:decoration-white",
+    },
 }
 
 export const Button = ({

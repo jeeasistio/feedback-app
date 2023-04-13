@@ -16,17 +16,17 @@ const feedback = {
 
 export const EditFeedbackForm = () => {
     return (
-        <div className="relative mt-10 space-y-6 rounded-xl bg-white p-6 pt-12">
-            <Typography variant="h3">
+        <div className="relative mt-10 space-y-6 rounded-xl bg-white p-6 pt-12 sm:p-8 sm:pt-16">
+            <Typography variant="h1" className="mb-12">
                 Editing {`'${feedback.title}'`}
             </Typography>
 
-            <div className="absolute -top-6 -translate-y-1/2">
+            <div className="absolute -top-6 h-[40px] w-[40px] -translate-y-1/2 sm:h-[56px] sm:w-[56px]">
                 <Image
                     src="/shared/icon-edit-feedback.svg"
                     alt="plus-icon"
-                    width={40}
-                    height={40}
+                    fill
+                    sizes="(max-width: 768px) 56px, 56px"
                 />
             </div>
 
