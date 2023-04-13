@@ -23,6 +23,11 @@ const buttonMapping: Record<
         contrastText: "white",
         underlineColor: "hover:decoration-secondary",
     },
+    tertiary: {
+        background: "bg-tertiary",
+        contrastText: "white",
+        underlineColor: "hover:decoration-white",
+    },
     indigo: {
         background: "bg-indigo",
         contrastText: "white",
@@ -51,7 +56,7 @@ export const Button = ({
         <button
             className={`flex items-center justify-center gap-4 rounded-xl px-6 py-3 hover:opacity-80
             ${buttonMapping[color].background}
-            ${link && `hover:underline ${buttonMapping.underlineColor}`} 
+            ${link && `hover:underline ${buttonMapping[color].underlineColor}`} 
             ${fullWidth && "w-full"}`}
         >
             {startIcon}

@@ -7,7 +7,7 @@ import { Drawer } from "@/components/Utils/Drawer"
 import { SidebarProvider } from "@/contexts/sidebar"
 import { CATEGORIES } from "@/lib/category"
 import { CategoryProvider } from "@/contexts/categories"
-import { FeedbackActions } from "@/components/Suggestion/FeedbackActions"
+import { SuggestionActions } from "@/components/Suggestion/SuggestionActions"
 import { FeedbackCard } from "@/components/Shared/FeedbackCard"
 import { NoFeedback } from "@/components/Shared/NoFeedback"
 
@@ -50,7 +50,7 @@ const Home = () => {
                     </div>
                     <div className="lg:col-span-8">
                         <div className="mb-6">
-                            <FeedbackActions />
+                            <SuggestionActions />
                         </div>
                         <div className="px-4 sm:px-0">
                             <FeedbackCard {...feedback} />
