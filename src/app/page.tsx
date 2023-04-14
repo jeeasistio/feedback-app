@@ -49,7 +49,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="lg:col-span-8">
-                        <div>
+                        <div className="mb-6">
                             <SuggestionActions />
                         </div>
                         <div className="px-4 sm:px-0">
