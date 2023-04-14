@@ -24,7 +24,7 @@ export const CommentContent = ({ content, user, replyingTo }: Props) => {
             />
             <div className="col-span-8 ml-4 sm:col-span-10 lg:ml-0">
                 <Typography variant="h4">{user.name}</Typography>
-                <Typography variant="h4" color="gray" className="font-normal">
+                <Typography variant="body2" color="gray">
                     @{user.username}
                 </Typography>
             </div>

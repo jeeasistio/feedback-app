@@ -27,11 +27,7 @@ export const Dropdown = ({ options, label }: Props) => {
                 className="w-full rounded-xl bg-tertiary px-4 py-6"
             >
                 <div className="flex items-center gap-2">
-                    <Typography
-                        variant="h4"
-                        color="white"
-                        className="font-normal"
-                    >
+                    <Typography variant="body2" color="white">
                         {label} :
                     </Typography>
                     <Typography variant="h4" color="white">

@@ -4,14 +4,24 @@ import { Typography } from "../Utils/Typography"
 interface Props {
     count: number
     active: boolean
+    orientation?: "horizontal" | "vertical"
     onClick: () => void
 }
 
-export const UpvoteButton = ({ count, active, onClick }: Props) => {
+export const UpvoteButton = ({
+    count,
+    active,
+    onClick,
+    orientation = "vertical",
+}: Props) => {
     return (
         <button
             onClick={onClick}
-            className={`hover:bg-gray-200 flex w-max cursor-pointer flex-row items-center gap-2 rounded-lg px-2 py-1 sm:flex-col sm:py-2 
+            className={`hover:bg-gray-200 flex w-max cursor-pointer flex-row items-center gap-2 rounded-lg px-2 py-1 ${
+                orientation === "horizontal"
+                    ? "flex-row"
+                    : "flex-row sm:flex-col sm:py-2"
+            }
             ${active ? "bg-secondary" : "bg-white-100"}`}
         >
             {active ? (

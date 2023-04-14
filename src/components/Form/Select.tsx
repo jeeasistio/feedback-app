@@ -38,7 +38,7 @@ export const Select = ({
                 className="w-full rounded-md border border-transparent bg-white-200 px-5 py-2 hover:border-secondary"
             >
                 <div className="flex items-center justify-between">
-                    <Typography variant="body1" className="font-normal">
+                    <Typography variant="body1">
                         {options.find((option) => option === value)}
                     </Typography>
 

@@ -22,7 +22,7 @@ const feedback = {
 
 const Home = () => {
     return (
-        <main className="container max-w-screen-xl sm:my-8 sm:px-4">
+        <main className="container mb-8 max-w-screen-xl sm:my-8 sm:px-4">
             <CategoryProvider>
                 <div className="grid-cols-10 gap-6 lg:grid">
                     <div className="col-span-2 grid-cols-3 gap-4 sm:max-lg:mb-8 sm:max-lg:grid lg:grid-cols-1 lg:space-y-6">
@@ -49,7 +49,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="lg:col-span-8">
-                        <div className="mb-6">
+                        <div>
                             <SuggestionActions />
                         </div>
                         <div className="px-4 sm:px-0">

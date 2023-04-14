@@ -39,7 +39,7 @@ export const TextField = ({
                 value={value}
             />
             {error && errorLabel && (
-                <Typography variant="h4" color="red" className="font-normal">
+                <Typography variant="body2" color="red">
                     {errorLabel}
                 </Typography>
             )}
