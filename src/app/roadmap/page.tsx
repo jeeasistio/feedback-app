@@ -11,7 +11,7 @@ const options = [
 const types = ["planned", "in_progress", "live"] as const
 const active = options[0].type
 
-const Roadmap = () => {
+const Roadmap = async () => {
     return (
         <main className="container mb-8 max-w-screen-xl sm:my-8 sm:px-4">
             <div>

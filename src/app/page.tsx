@@ -10,6 +10,7 @@ import { CategoryProvider } from "@/contexts/categories"
 import { SuggestionActions } from "@/components/Suggestion/SuggestionActions"
 import { FeedbackCard } from "@/components/Shared/FeedbackCard"
 import { NoFeedback } from "@/components/Shared/NoFeedback"
+import { useSession } from "next-auth/react"
 
 const roadmap = { planned: 3, in_progress: 2, live: 1 }
 const feedback = {
@@ -21,6 +22,8 @@ const feedback = {
 }
 
 const Home = () => {
+    const session = useSession()
+    console.log(session)
     return (
         <main className="container mb-8 max-w-screen-xl sm:my-8 sm:px-4">
             <CategoryProvider>
