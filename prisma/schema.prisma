@@ -64,7 +64,7 @@ model AppUser {
   name      String
   image     String?
   userId    String     @db.ObjectId
-  username  String     @unique
+  username  String
   Feedback  Feedback[]
   ReplyFrom Reply[]    @relation("ReplyFrom")
   ReplyTo   Reply[]    @relation("ReplyTo")

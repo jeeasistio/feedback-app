@@ -35,29 +35,29 @@ const handler = NextAuth({
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_LOCAL_URL}/mock_data.json`
             )
-            const randomData = (
-                (await res.json()) as {
-                    full_name: string
-                    username: string
-                    image: string
-                }[]
-            )[Math.floor(Math.random() * 300)]
-            const name = randomData.full_name
-            const username = randomData.username
-            const image = randomData.image
-            const appUser = await prisma.appUser.findFirst({
-                where: { userId: user.id },
+            const randomData = (await res.json()) as {
+                full_name: string
+                username: string
+                image: string
+            }[]
+            const name =
+                randomData[Math.floor(Math.random() * randomData.length) + 1]
+                    .full_name
+            const username =
+                randomData[Math.floor(Math.random() * randomData.length) + 1]
+                    .username
+            const image =
+                randomData[Math.floor(Math.random() * randomData.length) + 1]
+                    .image
+
+            await prisma.appUser.create({
+                data: {
+                    userId: user.id,
+                    name: name,
+                    username: username,
+                    image: image,
+                },
             })
-            if (!appUser) {
-                await prisma.appUser.create({
-                    data: {
-                        userId: user.id,
-                        name: name,
-                        username: username,
-                        image: image,
-                    },
-                })
-            }
         },
     },
     session: { strategy: "jwt" },
