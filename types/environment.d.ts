@@ -4,6 +4,7 @@ declare global {
             NODE_ENV: "development" | "production"
             DATABASE_URL: string
             NEXTAUTH_URL: string
+            NEXT_PUBLIC_LOCAL_URL: string
             EMAIL_SERVER_USER: string
             EMAIL_SERVER_PASSWORD: string
             EMAIL_SERVER_HOST: string
