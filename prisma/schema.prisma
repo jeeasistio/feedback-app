@@ -59,16 +59,17 @@ model VerificationToken {
 // App
 
 model AppUser {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  user      User       @relation(fields: [userId], references: [id])
-  name      String
-  image     String?
-  userId    String     @db.ObjectId
-  username  String
-  Feedback  Feedback[]
-  ReplyFrom Reply[]    @relation("ReplyFrom")
-  ReplyTo   Reply[]    @relation("ReplyTo")
-  Comment   Comment[]
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  User         User       @relation(fields: [userId], references: [id])
+  name         String
+  image        String?
+  userId       String     @db.ObjectId
+  username     String
+  Comment      Comment[]
+  ReplyFrom    Reply[]    @relation("ReplyFrom")
+  ReplyTo      Reply[]    @relation("ReplyTo")
+  FeedbackFrom Feedback[] @relation("FeedbackFrom")
+  Upvote       Upvote[]
 }
 
 enum CategoryName {
@@ -98,32 +99,44 @@ model Status {
 }
 
 model Feedback {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  String   @db.ObjectId
-  upvotes     AppUser  @relation(fields: [appUserId], references: [id])
-  Status      Status?  @relation(fields: [statusId], references: [id])
-  statusId    String?  @db.ObjectId
-  appUserId   String   @db.ObjectId
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  description    String
+  Category       Category  @relation(fields: [categoryId], references: [id])
+  categoryId     String    @db.ObjectId
+  Status         Status    @relation(fields: [statusId], references: [id])
+  statusId       String    @db.ObjectId
+  From           AppUser   @relation("FeedbackFrom", fields: [feedbackFromId], references: [id])
+  feedbackFromId String    @db.ObjectId
+  Upvote         Upvote[]
+  Comment        Comment[]
+}
+
+model Upvote {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  Feedback   Feedback @relation(fields: [feedbackId], references: [id])
+  feedbackId String   @db.ObjectId
+  AppUser    AppUser  @relation(fields: [appUserId], references: [id])
+  appUserId  String   @db.ObjectId
 }
 
 model Reply {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   content     String
-  from        AppUser  @relation("ReplyFrom", fields: [replyFromId], references: [id])
-  replyFromId String   @db.ObjectId
-  to          AppUser  @relation("ReplyTo", fields: [replyToId], references: [id])
-  replyToId   String   @db.ObjectId
-  Comment     Comment? @relation(fields: [commentId], references: [id])
-  commentId   String?  @db.ObjectId
+  From        AppUser @relation("ReplyFrom", fields: [replyFromId], references: [id])
+  replyFromId String  @db.ObjectId
+  To          AppUser @relation("ReplyTo", fields: [replyToId], references: [id])
+  replyToId   String  @db.ObjectId
+  Comment     Comment @relation(fields: [commentId], references: [id])
+  commentId   String  @db.ObjectId
 }
 
 model Comment {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  content   String
-  from      AppUser @relation(fields: [appUserId], references: [id])
-  appUserId String  @db.ObjectId
-  replies   Reply[]
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content    String
+  Feedback   Feedback @relation(fields: [feedbackId], references: [id])
+  feedbackId String   @db.ObjectId
+  From       AppUser  @relation(fields: [appUserId], references: [id])
+  appUserId  String   @db.ObjectId
+  Replies    Reply[]
 }
