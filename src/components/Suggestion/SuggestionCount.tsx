@@ -1,8 +1,14 @@
 import Image from "next/image"
 import { Typography } from "../Utils/Typography"
+import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
+import { useCategory } from "@/hooks/useCategory"
 
 export const SuggestionCount = () => {
-    const count = 5
+    const { activeCat } = useCategory()
+    const { data: feedbacks, isLoading } = useGetFeedbacks(
+        activeCat.name,
+        "PLANNED"
+    )
 
     return (
         <div className="hidden items-center gap-4 sm:flex">
@@ -13,7 +19,7 @@ export const SuggestionCount = () => {
                 height={24}
             />
             <Typography variant="h3" color="white">
-                {count} Suggestions
+                {feedbacks ? feedbacks.length : 0} Suggestions
             </Typography>
         </div>
     )

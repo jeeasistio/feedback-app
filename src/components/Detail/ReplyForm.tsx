@@ -13,6 +13,7 @@ export const ReplyForm = () => {
                     placeholder="Type your comment here"
                     value=""
                     onChange={() => {}}
+                    maxLength={250}
                 />
             </div>
             <div>

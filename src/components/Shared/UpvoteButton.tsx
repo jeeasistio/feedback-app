@@ -1,23 +1,24 @@
 import Image from "next/image"
 import { Typography } from "../Utils/Typography"
+import { Feedback } from "@prisma/client"
 
 interface Props {
+    feedbackId: Feedback["id"]
     count: number
     active: boolean
     orientation?: "horizontal" | "vertical"
-    onClick: () => void
 }
 
 export const UpvoteButton = ({
+    feedbackId,
     count,
     active,
-    onClick,
     orientation = "vertical",
 }: Props) => {
     return (
         <button
-            onClick={onClick}
-            className={`hover:bg-gray-200 flex w-max cursor-pointer flex-row items-center gap-2 rounded-lg px-2 py-1 ${
+            onClick={() => {}}
+            className={`flex w-max min-w-[40px] cursor-pointer flex-row items-center gap-2 rounded-lg px-2 py-1 hover:bg-gray-100 ${
                 orientation === "horizontal"
                     ? "flex-row"
                     : "flex-row sm:flex-col sm:py-2"
@@ -33,7 +34,7 @@ export const UpvoteButton = ({
                 />
             ) : (
                 <Image
-                    src="/shared/icon-arrow-up-tertiary.svg"
+                    src="/shared/icon-arrow-up-secondary.svg"
                     alt="arrow-up-icon"
                     width={10}
                     height={6}

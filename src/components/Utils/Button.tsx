@@ -1,12 +1,14 @@
 import { ReactNode } from "react"
 import { Typography } from "./Typography"
+import Link from "next/link"
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     color?: string
     children: ReactNode
-    link?: boolean
+    underlined?: boolean
     startIcon?: ReactNode
     fullWidth?: boolean
+    href?: string
 }
 
 const buttonMapping: Record<
@@ -48,16 +50,22 @@ const buttonMapping: Record<
 export const Button = ({
     color = "primary",
     children,
-    link = false,
+    underlined = false,
     startIcon,
     fullWidth = false,
+    href,
+    ...props
 }: Props) => {
-    return (
+    const jsx = (
         <button
             className={`flex items-center justify-center gap-4 rounded-xl px-6 py-3 hover:opacity-80
             ${buttonMapping[color].background}
-            ${link && `hover:underline ${buttonMapping[color].underlineColor}`} 
+            ${
+                underlined &&
+                `hover:underline ${buttonMapping[color].underlineColor}`
+            } 
             ${fullWidth && "w-full"}`}
+            {...props}
         >
             {startIcon}
             <Typography variant="h4" color={buttonMapping[color].contrastText}>
@@ -65,4 +73,8 @@ export const Button = ({
             </Typography>
         </button>
     )
+
+    if (href) return <Link href={href}>{jsx}</Link>
+
+    return jsx
 }

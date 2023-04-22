@@ -1,9 +1,10 @@
 import { ChangeEventHandler } from "react"
 import { Typography } from "../Utils/Typography"
+import { UseFormRegister } from "react-hook-form"
 
 export interface Props {
-    value: string
-    onChange: ChangeEventHandler<HTMLTextAreaElement> &
+    value?: string
+    onChange?: ChangeEventHandler<HTMLTextAreaElement> &
         ChangeEventHandler<HTMLInputElement>
     placeholder?: string
     error?: boolean
@@ -11,6 +12,9 @@ export interface Props {
     fullWidth?: boolean
     className?: string
     multiline?: boolean
+    register?: UseFormRegister<any>
+    name?: string
+    maxLength?: number
 }
 
 export const TextField = ({
@@ -22,6 +26,9 @@ export const TextField = ({
     value,
     className,
     placeholder,
+    register,
+    name = "",
+    maxLength,
 }: Props) => {
     const Element = multiline ? "textarea" : "input"
     return (
@@ -33,10 +40,12 @@ export const TextField = ({
                 ${multiline && "resize-none"}
                 ${className}
                 `}
-                onChange={onChange}
                 placeholder={placeholder}
                 rows={multiline ? 4 : 1}
                 value={value}
+                maxLength={maxLength}
+                {...(register ? register(name) : {})}
+                onChange={onChange}
             />
             {error && errorLabel && (
                 <Typography variant="body2" color="red">

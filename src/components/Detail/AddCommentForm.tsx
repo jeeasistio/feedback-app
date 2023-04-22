@@ -18,6 +18,7 @@ export const AddCommentForm = () => {
                     placeholder="Type your comment here"
                     value=""
                     onChange={() => {}}
+                    maxLength={250}
                 />
             </form>
 

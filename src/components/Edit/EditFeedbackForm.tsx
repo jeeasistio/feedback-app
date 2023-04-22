@@ -1,11 +1,11 @@
 "use client"
 
-import { CATEGORIES } from "@/lib/category"
 import { Select } from "../Form/Select"
 import { TextField } from "../Form/TextField"
 import { Typography } from "../Utils/Typography"
 import Image from "next/image"
 import { FeedbackField } from "../Shared/FeedbackField"
+import { NewFeedbackActions } from "../New/NewFeedbackActions"
 import { EditFeedbackActions } from "./EditFeedbackActions"
 
 const feedback = {

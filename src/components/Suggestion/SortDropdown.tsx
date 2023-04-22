@@ -1,10 +1,17 @@
-import { SORTOPTIONS } from "@/lib/sort"
 import { Dropdown } from "../Utils/Dropdown"
 
 export const SortDropdown = () => {
     return (
         <div>
-            <Dropdown options={SORTOPTIONS} label="Sort by" />
+            <Dropdown
+                options={[
+                    "Most Upvotes",
+                    "Least Upvotes",
+                    "Most Comments",
+                    "Least Comments",
+                ]}
+                label="Sort by"
+            />
         </div>
     )
 }

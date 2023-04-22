@@ -8,7 +8,7 @@ interface Props {
 export const GoBackButton = ({ color = "light" }: Props) => {
     return (
         <Button
-            link
+            underlined
             startIcon={
                 <Image
                     src={

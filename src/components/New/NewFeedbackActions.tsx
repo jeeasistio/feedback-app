@@ -1,14 +1,15 @@
+import { useRouter } from "next/navigation"
 import { Button } from "../Utils/Button"
 
 export const NewFeedbackActions = () => {
-    return (
-        <div className="flex flex-col justify-between gap-4 sm:flex-row">
-            <Button color="red">Delete</Button>
+    const router = useRouter()
 
-            <div className="flex flex-col justify-end gap-4 sm:flex-row">
-                <Button color="indigo">Cancel</Button>
-                <Button>Add Feedback</Button>
-            </div>
+    return (
+        <div className="flex flex-col justify-end gap-4 sm:flex-row">
+            <Button color="indigo" onClick={router.back}>
+                Cancel
+            </Button>
+            <Button type="submit">Add Feedback</Button>
         </div>
     )
 }

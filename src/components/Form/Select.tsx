@@ -4,10 +4,10 @@ import { useClickOutside } from "@/hooks/useClickOutside"
 import Image from "next/image"
 
 interface Props {
-    options: string[]
+    options: { value: string; label: string }[]
     fullWidth?: boolean
     value: string
-    onChange: (value: string) => void
+    onChange: (value: any) => void
 }
 
 export const Select = ({
@@ -19,7 +19,7 @@ export const Select = ({
     const ref = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(!open)
-    const handleSelect = (option: string) => {
+    const handleSelect = (option: any) => {
         onChange(option)
         setOpen(false)
     }
@@ -34,12 +34,16 @@ export const Select = ({
             ref={ref}
         >
             <button
+                type="button"
                 onClick={handleOpen}
                 className="w-full rounded-md border border-transparent bg-white-200 px-5 py-2 hover:border-secondary"
             >
                 <div className="flex items-center justify-between">
                     <Typography variant="body1">
-                        {options.find((option) => option === value)}
+                        {
+                            options.find((option) => option.value === value)
+                                ?.label
+                        }
                     </Typography>
 
                     {open ? (
@@ -65,13 +69,13 @@ export const Select = ({
                     {options.map((option) => (
                         <li
                             className="flex items-center justify-between px-4 py-2 text-left text-gray hover:text-primary"
-                            key={option}
+                            key={option.value}
                             onClick={() => handleSelect(option)}
                         >
                             <Typography color="inherit" variant="body1">
-                                {option}
+                                {option.label}
                             </Typography>
-                            {option === value && (
+                            {option.value === value && (
                                 <Image
                                     src="/shared/icon-check.svg"
                                     alt="check-icon"

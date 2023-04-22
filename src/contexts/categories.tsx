@@ -1,12 +1,14 @@
+import { ALLCATEGORY, CategoryAll } from "@/helpers/category"
+import { Category } from "@prisma/client"
 import { ReactNode, createContext, useState } from "react"
 
 interface CategoryContext {
-    category: string
-    handleChange: (cat: string) => void
+    activeCat: Category | CategoryAll
+    handleChange: (cat: Category | CategoryAll) => void
 }
 
 export const CategoryContext = createContext<CategoryContext>({
-    category: "All",
+    activeCat: ALLCATEGORY,
     handleChange: () => {},
 })
 
@@ -15,11 +17,15 @@ interface Props {
 }
 
 export const CategoryProvider = ({ children }: Props) => {
-    const [category, setActiveCat] = useState("All")
-    const handleChange = (cat: string) => setActiveCat(cat)
+    const [activeCat, setActiveCat] = useState<Category | CategoryAll>(
+        ALLCATEGORY
+    )
+    const handleChange = (cat: Category | CategoryAll) => {
+        setActiveCat(cat)
+    }
 
     return (
-        <CategoryContext.Provider value={{ category, handleChange }}>
+        <CategoryContext.Provider value={{ activeCat, handleChange }}>
             {children}
         </CategoryContext.Provider>
     )

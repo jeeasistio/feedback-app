@@ -3,24 +3,21 @@
 import { UpvoteButton } from "./UpvoteButton"
 import { Typography } from "../Utils/Typography"
 import { Category } from "./Category"
-import { CATEGORYMAPPING } from "@/lib/category"
 import { CommentCount } from "./CommentCount"
+import { FeedbackQueryResult } from "@/helpers/feedback"
+import { useSession } from "next-auth/react"
 
-interface Props {
-    title: string
-    description: string
-    category: string
-    upvotes: number
-    commentsCount: number
-}
+interface Props extends FeedbackQueryResult {}
 
 export const FeedbackCard = ({
     title,
     description,
     category,
-    commentsCount,
     upvotes,
+    upvotesCount,
+    commentsCount,
 }: Props) => {
+    const session = useSession()
     return (
         <div className="grid grid-cols-12 gap-3 rounded-xl bg-white p-6 sm:p-8">
             <div className="col-span-12 sm:col-span-10 sm:max-lg:ml-4">
@@ -31,14 +28,18 @@ export const FeedbackCard = ({
                     {description}
                 </Typography>
                 <Category interactive={false} textColor="secondary">
-                    {CATEGORYMAPPING[category].title}
+                    {category}
                 </Category>
             </div>
             <div className="col-span-3 sm:order-first sm:col-span-1">
                 <UpvoteButton
-                    active={true}
-                    count={upvotes}
-                    onClick={() => {}}
+                    feedbackId="123"
+                    active={
+                        upvotes.findIndex(
+                            (upvote) => upvote === session.data?.user.id
+                        ) > -1
+                    }
+                    count={upvotesCount}
                 />
             </div>
             <div className="col-span-9 flex items-center justify-end gap-2 sm:col-span-1">

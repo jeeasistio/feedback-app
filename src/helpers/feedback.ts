@@ -1,18 +1,61 @@
-import { AppUser, Category, Feedback, Upvote } from "@prisma/client"
+import { AppUser, Category, Feedback, Status, Upvote } from "@prisma/client"
 import { prisma } from "../../prisma/client"
 
-export const getFeedbacks = async (category: Category) => {
+export interface FeedbackQueryResult
+    extends Pick<Feedback, "id" | "title" | "description"> {
+    category: Category["label"]
+    status: Status["label"]
+    upvotes: Upvote["appUserId"][]
+    upvotesCount: number
+    commentsCount: number
+}
+
+export type GetFeedbacksQueryResult = FeedbackQueryResult[]
+
+export const getFeedbacks = async (
+    categoryId?: Category["id"],
+    statusId?: Status["id"]
+): Promise<GetFeedbacksQueryResult> => {
     const feedbacks = await prisma.feedback.findMany({
-        where: { categoryId: category.id },
+        where: { categoryId, statusId },
         select: {
-            Category: true,
-            Status: true,
             id: true,
             title: true,
             description: true,
+            Category: {
+                select: {
+                    label: true,
+                },
+            },
+            Status: {
+                select: {
+                    label: true,
+                },
+            },
+            Upvote: {
+                select: {
+                    appUserId: true,
+                },
+            },
+            _count: {
+                select: {
+                    Comment: true,
+                    Upvote: true,
+                },
+            },
         },
     })
-    return feedbacks
+
+    return feedbacks.map((feedback) => ({
+        id: feedback.id,
+        title: feedback.title,
+        description: feedback.description,
+        category: feedback.Category.label,
+        status: feedback.Status.label,
+        upvotes: feedback.Upvote.map((upvote) => upvote.appUserId),
+        upvotesCount: feedback._count.Upvote,
+        commentsCount: feedback._count.Comment,
+    }))
 }
 
 export const getUpvoteCount = async (feedbackId: Feedback["id"]) => {

@@ -1,9 +1,9 @@
-import NextAuth from "next-auth"
+import NextAuth, { AuthOptions } from "next-auth"
 import EmailProvider from "next-auth/providers/email"
 import { prisma } from "../../../../../prisma/client"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         EmailProvider({
@@ -62,6 +62,8 @@ const handler = NextAuth({
     },
     session: { strategy: "jwt" },
     secret: process.env.JWT_SECRET,
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

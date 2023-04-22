@@ -83,6 +83,7 @@ enum CategoryName {
 model Category {
   id       String       @id @default(auto()) @map("_id") @db.ObjectId
   name     CategoryName
+  label    String
   Feedback Feedback[]
 }
 
@@ -95,6 +96,7 @@ enum StatusName {
 model Status {
   id       String     @id @default(auto()) @map("_id") @db.ObjectId
   name     StatusName
+  label    String
   Feedback Feedback[]
 }
 
