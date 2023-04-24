@@ -8,8 +8,7 @@ export const GET = async (req: Request) => {
     const feedbackId = searchParams.get("feedback_id") as string
 
     const comments = await getComments(feedbackId)
-    console.log(comments)
-    return NextResponse.json({ comments })
+    return NextResponse.json(comments)
 }
 
 export const POST = async (req: Request) => {

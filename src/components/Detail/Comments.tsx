@@ -9,7 +9,7 @@ import { useParams } from "next/navigation"
 export const Comments = () => {
     const params = useParams()
     const { data: comments, isLoading } = useSWR<GetCommentsQueryResult>(
-        `/api/comment?feedback_id=${params.feedback_id}}`
+        `/api/comment?feedback_id=${params.feedback_id}`
     )
 
     if (isLoading) return <div>Loading...</div>
