@@ -1,31 +1,28 @@
 import Image from "next/image"
 import { Typography } from "../Utils/Typography"
 import { ReplyForm } from "./ReplyForm"
+import { AppUser, Comment } from "@prisma/client"
 
 interface Props {
-    content: string
-    user: {
-        image: string
-        name: string
-        username: string
-    }
+    content: Comment["content"]
+    from: Pick<AppUser, "image" | "name" | "username">
     replyingTo?: string
 }
 
-export const CommentContent = ({ content, user, replyingTo }: Props) => {
+export const CommentContent = ({ content, from, replyingTo }: Props) => {
     return (
         <div className="grid grid-cols-12 items-center space-y-1 sm:space-y-2">
             <Image
                 className="col-span-2 rounded-full sm:col-span-1"
-                src={user.image}
+                src={from.image ?? "/user-images/no-profile.jpg"}
                 alt="profile-image"
                 width={40}
                 height={40}
             />
             <div className="col-span-8 ml-4 sm:col-span-10 lg:ml-0">
-                <Typography variant="h4">{user.name}</Typography>
+                <Typography variant="h4">{from.name}</Typography>
                 <Typography variant="body2" color="gray">
-                    @{user.username}
+                    @{from.username}
                 </Typography>
             </div>
             <div className="col-span-2 ml-auto sm:col-span-1">
@@ -40,7 +37,7 @@ export const CommentContent = ({ content, user, replyingTo }: Props) => {
                 <Typography variant="body2" color="gray">
                     {replyingTo && (
                         <span className="font-bold text-primary">
-                            @{user.username}&nbsp;
+                            @{from.username}&nbsp;
                         </span>
                     )}
 

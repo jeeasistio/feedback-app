@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { CategoryName, Feedback } from "@prisma/client"
 import { NewFeedbackActions } from "./NewFeedbackActions"
 import { useGetCategory } from "@/hooks/useGetCategories"
+import { useRouter } from "next/navigation"
 
 interface NewFeedbackInputs {
     title: Feedback["title"]
@@ -23,6 +24,7 @@ const initialFormValues: NewFeedbackInputs = {
 }
 
 export const NewFeedbackForm = () => {
+    const router = useRouter()
     const { allCategories } = useGetCategory()
     const { register, handleSubmit, watch, setValue } =
         useForm<NewFeedbackInputs>({ defaultValues: initialFormValues })
@@ -31,6 +33,7 @@ export const NewFeedbackForm = () => {
             method: "POST",
             body: JSON.stringify(data),
         })
+        router.push("/")
     }
 
     return (
@@ -75,9 +78,7 @@ export const NewFeedbackForm = () => {
                                 onChange={(cat: {
                                     value: CategoryName
                                     label: string
-                                }) => {
-                                    setValue("category", cat.value)
-                                }}
+                                }) => setValue("category", cat.value)}
                                 options={allCategories.map((cat) => ({
                                     value: cat.name,
                                     label: cat.label,
@@ -89,7 +90,7 @@ export const NewFeedbackForm = () => {
 
                 <div>
                     <FeedbackField
-                        title="Feedback Title"
+                        title="Feedback Detail"
                         description="Add a short, descriptive headline"
                         input={
                             <TextField

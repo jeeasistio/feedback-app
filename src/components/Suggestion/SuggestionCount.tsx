@@ -5,10 +5,7 @@ import { useCategory } from "@/hooks/useCategory"
 
 export const SuggestionCount = () => {
     const { activeCat } = useCategory()
-    const { data: feedbacks, isLoading } = useGetFeedbacks(
-        activeCat.name,
-        "PLANNED"
-    )
+    const { data: feedbacks } = useGetFeedbacks(activeCat.name)
 
     return (
         <div className="hidden items-center gap-4 sm:flex">

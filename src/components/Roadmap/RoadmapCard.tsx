@@ -1,6 +1,5 @@
 "use client"
 
-import { CATEGORYMAPPING } from "@/lib/category"
 import { Category } from "../Shared/Category"
 import { CommentCount } from "../Shared/CommentCount"
 import { UpvoteButton } from "../Shared/UpvoteButton"
@@ -57,16 +56,15 @@ export const RoadmapCard = ({
                     {description}
                 </Typography>
                 <Category interactive={false} textColor="secondary">
-                    {CATEGORYMAPPING[category].title}
+                    {/* {CATEGORYMAPPING[category].title} */}
                 </Category>
             </div>
             <div className="col-span-3">
-                <UpvoteButton
+                {/* <UpvoteButton
                     active={true}
                     count={upvotes}
-                    onClick={() => {}}
                     orientation="horizontal"
-                />
+                /> */}
             </div>
             <div className="col-span-9 flex items-center justify-end gap-2">
                 <CommentCount count={commentsCount} />

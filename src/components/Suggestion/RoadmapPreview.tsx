@@ -1,21 +1,18 @@
+"use client"
+
 import Link from "next/link"
 import { Typography } from "../Utils/Typography"
+import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
+import { useCategory } from "@/hooks/useCategory"
 
-interface Props {
-    roadmap: Record<string, number>
-}
-
-const roadmapMapping: Record<string, { title: string; color: string }> = {
-    planned: {
-        title: "Planned",
+const roadmapMapping: Record<string, { color: string }> = {
+    Planned: {
         color: "orange",
     },
-    in_progress: {
-        title: "In Progress",
+    "In-Progress": {
         color: "primary",
     },
-    live: {
-        title: "Live",
+    Live: {
         color: "blue",
     },
 }
@@ -27,7 +24,19 @@ const bgColor: Record<string, string> = {
     blue: "bg-blue",
 }
 
-export const RoadmapPreview = ({ roadmap }: Props) => {
+export const RoadmapPreview = () => {
+    const { activeCat } = useCategory()
+    const { data: feedbacks } = useGetFeedbacks(activeCat.name)
+
+    const roadmap = feedbacks?.reduce((acc, curr) => {
+        if (curr.status in acc) {
+            acc[curr.status] += 1
+        } else {
+            acc[curr.status] = 1
+        }
+        return acc
+    }, {} as Record<string, number>)
+
     return (
         <div className="flex flex-wrap items-center gap-2 rounded-xl bg-white p-4 sm:max-lg:h-full">
             <div className="w-full">
@@ -38,31 +47,33 @@ export const RoadmapPreview = ({ roadmap }: Props) => {
                         color="secondary"
                         className="w-min underline"
                     >
-                        <Link href="#">View</Link>
+                        <Link href="/roadmap">View</Link>
                     </Typography>
                 </div>
 
                 <div className="space-y-2">
-                    {Object.entries(roadmap).map(([key, value]) => (
-                        <div
-                            key={key}
-                            className="flex items-center justify-between"
-                        >
-                            <div key={key} className="flex items-center gap-2">
+                    {roadmap &&
+                        Object.entries(roadmap).map(([key, value]) => (
+                            <div
+                                key={key}
+                                className="flex items-center justify-between"
+                            >
                                 <div
-                                    className={`h-2 w-2 rounded-full ${
-                                        bgColor[roadmapMapping[key].color]
-                                    }`}
-                                />
-                                <Typography>
-                                    {roadmapMapping[key].title}
+                                    key={key}
+                                    className="flex items-center gap-2"
+                                >
+                                    <div
+                                        className={`h-2 w-2 rounded-full ${
+                                            bgColor[roadmapMapping[key].color]
+                                        }`}
+                                    />
+                                    <Typography>{key}</Typography>
+                                </div>
+                                <Typography className="font-bold">
+                                    {value}
                                 </Typography>
                             </div>
-                            <Typography className="font-bold">
-                                {value}
-                            </Typography>
-                        </div>
-                    ))}
+                        ))}
                 </div>
             </div>
         </div>

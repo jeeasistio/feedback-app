@@ -1,6 +1,43 @@
 import { AppUser, Category, Feedback, Status, Upvote } from "@prisma/client"
 import { prisma } from "../../prisma/client"
 
+export interface FeedbackEditQueryResult
+    extends Pick<Feedback, "id" | "title" | "description"> {
+    category: Category["name"]
+    status: Status["name"]
+}
+
+export const getEditFeedback = async (
+    feedbackId: Feedback["id"]
+): Promise<FeedbackEditQueryResult> => {
+    const feedback = await prisma.feedback.findFirstOrThrow({
+        where: { id: feedbackId },
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            Category: {
+                select: {
+                    name: true,
+                },
+            },
+            Status: {
+                select: {
+                    name: true,
+                },
+            },
+        },
+    })
+
+    return {
+        id: feedback.id,
+        title: feedback.title,
+        description: feedback.description,
+        category: feedback.Category.name,
+        status: feedback.Status.name,
+    }
+}
+
 export interface FeedbackQueryResult
     extends Pick<Feedback, "id" | "title" | "description"> {
     category: Category["label"]
@@ -14,10 +51,11 @@ export type GetFeedbacksQueryResult = FeedbackQueryResult[]
 
 export const getFeedbacks = async (
     categoryId?: Category["id"],
-    statusId?: Status["id"]
+    statusId?: Status["id"],
+    feedbackId?: Feedback["id"]
 ): Promise<GetFeedbacksQueryResult> => {
     const feedbacks = await prisma.feedback.findMany({
-        where: { categoryId, statusId },
+        where: { id: feedbackId, categoryId, statusId },
         select: {
             id: true,
             title: true,
@@ -58,20 +96,6 @@ export const getFeedbacks = async (
     }))
 }
 
-export const getUpvoteCount = async (feedbackId: Feedback["id"]) => {
-    const upvoteCount = await prisma.upvote.count({
-        where: { feedbackId },
-    })
-    return upvoteCount
-}
-
-export const getCommentCount = async (feedbackId: Feedback["id"]) => {
-    const commentCount = await prisma.comment.count({
-        where: { feedbackId },
-    })
-    return commentCount
-}
-
 export const createFeedback = async (feedback: Omit<Feedback, "id">) => {
     const plannedStatus = await prisma.status.findFirstOrThrow({
         where: { name: "PLANNED" },
@@ -81,10 +105,17 @@ export const createFeedback = async (feedback: Omit<Feedback, "id">) => {
     })
 }
 
-export const updateFeedback = async (feedback: Feedback) => {
+export const updateFeedback = async (
+    feedback: Omit<Feedback, "feedbackFromId">
+) => {
     await prisma.feedback.update({
         where: { id: feedback.id },
-        data: feedback,
+        data: {
+            title: feedback.title,
+            description: feedback.description,
+            categoryId: feedback.categoryId,
+            statusId: feedback.statusId,
+        },
     })
 }
 
@@ -101,6 +132,9 @@ export const upvoteFeedback = async (
     })
 }
 
-export const unupvoteFeedback = async (upvoteId: Upvote["id"]) => {
-    await prisma.upvote.delete({ where: { id: upvoteId } })
+export const unupvoteFeedback = async (
+    feedbackId: Feedback["id"],
+    appUserId: AppUser["id"]
+) => {
+    await prisma.upvote.deleteMany({ where: { feedbackId, appUserId } })
 }

@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server"
 import { prisma } from "../../../../prisma/client"
-import { createFeedback, getFeedbacks } from "@/helpers/feedback"
+import {
+    createFeedback,
+    getFeedbacks,
+    updateFeedback,
+} from "@/helpers/feedback"
 import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]/route"
 import { CategoryName, StatusName } from "@prisma/client"
 
 export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url)
-    console.log(123)
     const category = searchParams.get("category") as CategoryName | "All"
     const foundCategory =
         category !== "All"
@@ -50,5 +53,28 @@ export const POST = async (req: Request) => {
         feedbackFromId: userId,
         statusId: foundStatus.id,
     })
-    return NextResponse.json({ message: "Thanks for your feedback!" })
+    return NextResponse.json({ message: "Thanks for your feedback" })
+}
+
+export const PUT = async (req: Request) => {
+    const { id, title, description, category, status } = await req.json()
+
+    const foundCategory = await prisma.category.findFirstOrThrow({
+        where: { name: category },
+        select: { id: true },
+    })
+    const foundStatus = await prisma.status.findFirstOrThrow({
+        where: { name: status },
+        select: { id: true },
+    })
+
+    await updateFeedback({
+        id,
+        title,
+        description,
+        categoryId: foundCategory.id,
+        statusId: foundStatus.id,
+    })
+
+    return NextResponse.json({ message: "Feedback updated" })
 }
