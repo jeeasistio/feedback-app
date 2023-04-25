@@ -54,10 +54,12 @@ export const Button = ({
     startIcon,
     fullWidth = false,
     href,
+    type = "button",
     ...props
 }: Props) => {
     const jsx = (
         <button
+            type={type}
             className={`flex items-center justify-center gap-4 rounded-xl px-6 py-3 hover:opacity-80
             ${buttonMapping[color].background}
             ${

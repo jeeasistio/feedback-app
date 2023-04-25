@@ -1,17 +1,11 @@
+import { FeedbackQueryResult } from "@/helpers/feedback"
 import { Category } from "../Shared/Category"
 import { CommentCount } from "../Shared/CommentCount"
 import { UpvoteButton } from "../Shared/UpvoteButton"
 import { Typography } from "../Utils/Typography"
 import { roadmapMapping } from "./RoadmapList"
 
-interface Props {
-    type: keyof typeof roadmapMapping
-    title: string
-    description: string
-    category: string
-    upvotes: number
-    commentsCount: number
-}
+interface Props extends FeedbackQueryResult {}
 
 const bgColor: Record<string, string> = {
     orange: "bg-orange",
@@ -20,30 +14,30 @@ const bgColor: Record<string, string> = {
 }
 
 export const RoadmapCard = ({
-    category,
-    commentsCount,
-    description,
+    id,
     title,
-    type,
+    description,
+    category,
+    status,
     upvotes,
+    upvotesCount,
+    commentsCount,
 }: Props) => {
     return (
         <div className="relative grid grid-cols-12 gap-3 overflow-hidden rounded-xl bg-white p-6">
             <div
                 className={`${
-                    bgColor[roadmapMapping[type].color]
+                    bgColor[roadmapMapping[status].color]
                 } absolute top-0 h-2 w-full`}
             />
 
             <div className="col-span-12 mb-2 flex items-center gap-3">
                 <div
                     className={`bg h-2 w-2 rounded-full ${
-                        bgColor[roadmapMapping[type].color]
+                        bgColor[roadmapMapping[status].color]
                     }`}
                 />
-                <Typography color="gray">
-                    {roadmapMapping[type].title}
-                </Typography>
+                <Typography color="gray">{status}</Typography>
             </div>
 
             <div className="col-span-12">
@@ -59,8 +53,9 @@ export const RoadmapCard = ({
             </div>
             <div className="col-span-3">
                 <UpvoteButton
-                    active={true}
-                    count={upvotes}
+                    feedbackId={id}
+                    upvotes={upvotes}
+                    count={upvotesCount}
                     orientation="horizontal"
                 />
             </div>

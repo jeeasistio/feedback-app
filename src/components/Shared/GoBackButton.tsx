@@ -1,11 +1,16 @@
+"use client"
+
 import Image from "next/image"
 import { Button } from "../Utils/Button"
+import { useRouter } from "next/navigation"
 
 interface Props {
     color?: "dark" | "light"
 }
 
 export const GoBackButton = ({ color = "light" }: Props) => {
+    const router = useRouter()
+
     return (
         <Button
             underlined
@@ -22,6 +27,7 @@ export const GoBackButton = ({ color = "light" }: Props) => {
                 />
             }
             color={color === "light" ? "gray" : "tertiary"}
+            onClick={() => router.back()}
         >
             Go Back
         </Button>

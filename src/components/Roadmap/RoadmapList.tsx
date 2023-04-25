@@ -1,71 +1,63 @@
+"use client"
+
+import { Status, StatusName } from "@prisma/client"
 import { Typography } from "../Utils/Typography"
 import { RoadmapCard } from "./RoadmapCard"
+import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
 
-export const roadmapMapping = {
-    planned: {
-        title: "Planned",
+export const roadmapMapping: Record<
+    string,
+    {
+        status: StatusName
+        description: string
+        color: string
+    }
+> = {
+    Planned: {
+        status: "PLANNED",
         description: "Ideas prioritized for research",
         color: "orange",
     },
-    in_progress: {
-        title: "In-Progress",
+    "In-Progress": {
+        status: "IN_PROGRESS",
         description: "Currently being developed",
         color: "primary",
     },
-    live: {
-        title: "Live",
+    Live: {
+        status: "LIVE",
         description: "Released features",
         color: "blue",
     },
 }
 
 interface Props {
-    type: keyof typeof roadmapMapping
+    status: Status["label"]
 }
 
-const roadmaps = [
-    {
-        title: "Add tags for solutions",
-        category: "enhancement",
-        upvotes: 112,
-        commentsCount: 2,
-        description:
-            "Easier to search for solutions based on a specific stack.",
-    },
-    {
-        title: "Add tags for solutions",
-        category: "enhancement",
-        upvotes: 112,
-        commentsCount: 2,
-        description:
-            "Easier to search for solutions based on a specific stack.",
-    },
-    {
-        title: "Add tags for solutions",
-        category: "enhancement",
-        upvotes: 112,
-        commentsCount: 2,
-        description:
-            "Easier to search for solutions based on a specific stack.",
-    },
-]
+export const RoadmapList = ({ status }: Props) => {
+    const { data: feedbacks, isLoading } = useGetFeedbacks(
+        undefined,
+        roadmapMapping[status].status
+    )
 
-export const RoadmapList = ({ type }: Props) => {
     return (
         <div>
             <div className="my-8">
                 <Typography variant="h3" className="mb-1">
-                    {roadmapMapping[type].title}
+                    {status}
                 </Typography>
                 <Typography color="gray">
-                    {roadmapMapping[type].description}
+                    {roadmapMapping[status].description}
                 </Typography>
             </div>
 
             <div className="space-y-4">
-                {roadmaps.map((roadmap) => (
+                {isLoading && <div>Loading...</div>}
+                {feedbacks && feedbacks.length === 0 && <div>No Feedbacks</div>}
+                {!feedbacks && <div>Something went wrong</div>}
+                {feedbacks?.map((roadmap) => (
                     <div key={roadmap.title}>
-                        <RoadmapCard type={type} {...roadmap} />
+                        <RoadmapCard {...roadmap} />
                     </div>
                 ))}
             </div>
