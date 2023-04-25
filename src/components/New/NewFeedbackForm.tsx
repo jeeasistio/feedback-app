@@ -60,8 +60,7 @@ export const NewFeedbackForm = () => {
                             <TextField
                                 fullWidth
                                 placeholder="Type your description here"
-                                register={register}
-                                name="title"
+                                register={register("title")}
                             />
                         }
                     />
@@ -97,8 +96,7 @@ export const NewFeedbackForm = () => {
                                 fullWidth
                                 multiline
                                 placeholder="Type your description here"
-                                register={register}
-                                name="description"
+                                register={register("title")}
                             />
                         }
                     />

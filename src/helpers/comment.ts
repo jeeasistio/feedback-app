@@ -2,7 +2,7 @@ import { AppUser, Comment, Feedback, Reply } from "@prisma/client"
 import { prisma } from "../../prisma/client"
 
 export interface CommentQueryResult extends Pick<Comment, "id" | "content"> {
-    from: Pick<AppUser, "image" | "name" | "username">
+    from: Pick<AppUser, "id" | "image" | "name" | "username">
 }
 
 export type GetCommentsQueryResult = CommentQueryResult[]
@@ -17,6 +17,7 @@ export const getComments = async (
             content: true,
             From: {
                 select: {
+                    id: true,
                     image: true,
                     name: true,
                     username: true,
@@ -30,11 +31,41 @@ export const getComments = async (
     }))
 }
 
-export const getReplies = async (commentId: Comment["id"]) => {
+export interface ReplyQueryResult extends Pick<Reply, "id" | "content"> {
+    from: Pick<AppUser, "id" | "image" | "name" | "username">
+    to: Pick<AppUser, "username">
+}
+
+export type GetRepliesQueryResult = ReplyQueryResult[]
+
+export const getReplies = async (
+    commentId: Comment["id"]
+): Promise<GetRepliesQueryResult> => {
     const replies = await prisma.reply.findMany({
         where: { commentId },
+        select: {
+            id: true,
+            content: true,
+            From: {
+                select: {
+                    id: true,
+                    image: true,
+                    name: true,
+                    username: true,
+                },
+            },
+            To: {
+                select: {
+                    username: true,
+                },
+            },
+        },
     })
-    return replies
+    return replies.map((reply) => ({
+        ...reply,
+        from: reply.From,
+        to: reply.To,
+    }))
 }
 
 export const createComment = async (comment: Omit<Comment, "id">) => {

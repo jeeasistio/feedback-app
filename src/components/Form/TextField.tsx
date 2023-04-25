@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react"
 import { Typography } from "../Utils/Typography"
-import { UseFormRegister } from "react-hook-form"
+import { UseFormRegisterReturn } from "react-hook-form"
 
 export interface Props {
     value?: string
@@ -12,8 +12,7 @@ export interface Props {
     fullWidth?: boolean
     className?: string
     multiline?: boolean
-    register?: UseFormRegister<any>
-    name?: string
+    register?: UseFormRegisterReturn<any>
     maxLength?: number
 }
 
@@ -27,7 +26,6 @@ export const TextField = ({
     className,
     placeholder,
     register,
-    name = "",
     maxLength,
 }: Props) => {
     const Element = multiline ? "textarea" : "input"
@@ -44,7 +42,7 @@ export const TextField = ({
                 rows={multiline ? 4 : 1}
                 value={value}
                 maxLength={maxLength}
-                {...(register ? register(name) : {})}
+                {...(register ? register : {})}
                 onChange={onChange}
             />
             {error && errorLabel && (

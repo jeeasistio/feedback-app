@@ -1,26 +1,20 @@
 import { CommentQueryResult } from "@/helpers/comment"
 import { CommentContent } from "./CommentContent"
+import { Replies } from "./Replies"
 
 interface Props extends CommentQueryResult {}
 
-export const Comment = ({ content, from }: Props) => {
+export const Comment = (props: Props) => {
     return (
         <div>
             <div className="mb-4">
-                <CommentContent content={content} from={from} />
+                <CommentContent {...props} />
             </div>
 
             <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-1 mx-auto h-3/5 w-[1px] bg-gray opacity-10" />
                 <div className="col-span-11">
-                    {/* {replies?.map((reply, i) => (
-                        <div className="mb-6" key={i}>
-                            <CommentContent
-                                {...reply}
-                                replyingTo={reply.replyingTo}
-                            />
-                        </div>
-                    ))} */}
+                    <Replies commentId={props.id} />
                 </div>
             </div>
         </div>

@@ -8,7 +8,6 @@ import { Comment, Feedback } from "@prisma/client"
 import { mutate } from "swr"
 
 interface NewCommentInput {
-    feedbackId: Feedback["id"]
     content: Comment["content"]
 }
 
@@ -18,15 +17,15 @@ interface Props {
 
 export const AddCommentForm = ({ feedbackId }: Props) => {
     const { register, handleSubmit, reset } = useForm<NewCommentInput>({
-        defaultValues: { content: "", feedbackId },
+        defaultValues: { content: "" },
     })
     const onSubmit = async (data: NewCommentInput) => {
         await fetch("/api/comment", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify({ ...data, feedbackId }),
         })
         reset()
-        mutate(`/api/comment?feedbackId=${feedbackId}`)
+        mutate(`/api/comment?feedback_id=${feedbackId}`)
     }
     return (
         <div className="rounded-xl bg-white p-6">
@@ -40,8 +39,7 @@ export const AddCommentForm = ({ feedbackId }: Props) => {
                         fullWidth
                         multiline
                         placeholder="Type your comment here"
-                        register={register}
-                        name="content"
+                        register={register("content")}
                         maxLength={250}
                     />
                 </div>
