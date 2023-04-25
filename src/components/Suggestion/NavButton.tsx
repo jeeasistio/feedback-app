@@ -1,3 +1,5 @@
+"use client"
+
 import { useSidebar } from "@/hooks/useSidebar"
 import Image from "next/image"
 

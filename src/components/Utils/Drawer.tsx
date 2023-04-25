@@ -1,3 +1,5 @@
+"use client"
+
 import { useClickOutside } from "@/hooks/useClickOutside"
 import { useSidebar } from "@/hooks/useSidebar"
 import { ReactNode, useEffect, useRef } from "react"

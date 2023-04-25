@@ -1,7 +1,7 @@
 import { Jost } from "next/font/google"
 import "./globals.css"
-import AuthContext from "@/components/Utils/AuthContext"
-import { SWRContext } from "@/components/Utils/SWRContext"
+import AuthProvider from "@/components/Utils/AuthProvider"
+import { SWRProvider } from "@/components/Utils/SWRProvider"
 
 export const metadata = {
     title: "Create Next App",
@@ -25,9 +25,9 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${jost.variable}`}>
             <body>
-                <AuthContext>
-                    <SWRContext>{children}</SWRContext>
-                </AuthContext>
+                <AuthProvider>
+                    <SWRProvider>{children}</SWRProvider>
+                </AuthProvider>
             </body>
         </html>
     )

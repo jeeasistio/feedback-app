@@ -1,3 +1,5 @@
+"use client"
+
 import { ALLCATEGORY, CategoryAll } from "@/helpers/category"
 import { Category } from "@prisma/client"
 import { ReactNode, createContext, useState } from "react"

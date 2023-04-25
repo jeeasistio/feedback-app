@@ -1,3 +1,5 @@
+"use client"
+
 import { useCategory } from "@/hooks/useCategory"
 import { Category } from "../Shared/Category"
 import { useGetCategory } from "@/hooks/useGetCategories"

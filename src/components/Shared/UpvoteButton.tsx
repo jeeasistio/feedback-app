@@ -1,22 +1,28 @@
+"use client"
+
 import Image from "next/image"
 import { Typography } from "../Utils/Typography"
-import { Feedback } from "@prisma/client"
+import { Feedback, Upvote } from "@prisma/client"
 import { useState } from "react"
+import { useSession } from "next-auth/react"
 
 interface Props {
     feedbackId: Feedback["id"]
     count: number
-    active: boolean
+    upvotes: Upvote["appUserId"][]
     orientation?: "horizontal" | "vertical"
 }
 
 export const UpvoteButton = ({
     feedbackId,
     count,
-    active,
+    upvotes,
     orientation = "vertical",
 }: Props) => {
-    const [isActive, setIsActive] = useState<boolean>(active)
+    const session = useSession()
+    const [isActive, setIsActive] = useState<boolean>(
+        upvotes.findIndex((id) => id === session?.data?.user?.id) !== -1
+    )
     const [upvotesCount, setUpvotesCount] = useState<number>(count)
     const handleUpvote = async () => {
         const res = await fetch(`/api/upvote`, {

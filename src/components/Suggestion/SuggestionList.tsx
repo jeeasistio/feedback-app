@@ -1,3 +1,5 @@
+"use client"
+
 import { FeedbackCard } from "../Shared/FeedbackCard"
 import { useCategory } from "@/hooks/useCategory"
 import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"

@@ -1,11 +1,8 @@
-"use client"
-
 import { UpvoteButton } from "./UpvoteButton"
 import { Typography } from "../Utils/Typography"
 import { Category } from "./Category"
 import { CommentCount } from "./CommentCount"
 import { FeedbackQueryResult } from "@/helpers/feedback"
-import { useSession } from "next-auth/react"
 import Link from "next/link"
 
 interface Props extends FeedbackQueryResult {}
@@ -19,7 +16,6 @@ export const FeedbackCard = ({
     upvotesCount,
     commentsCount,
 }: Props) => {
-    const session = useSession()
     return (
         <div className="grid grid-cols-12 gap-3 rounded-xl bg-white p-6 sm:p-8">
             <div className="col-span-12 sm:col-span-10 sm:max-lg:ml-4">
@@ -41,11 +37,7 @@ export const FeedbackCard = ({
             <div className="col-span-3 sm:order-first sm:col-span-1">
                 <UpvoteButton
                     feedbackId={id}
-                    active={
-                        upvotes.findIndex(
-                            (upvote) => upvote === session.data?.user.id
-                        ) > -1
-                    }
+                    upvotes={upvotes}
                     count={upvotesCount}
                 />
             </div>

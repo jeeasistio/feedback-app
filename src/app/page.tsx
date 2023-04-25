@@ -1,5 +1,3 @@
-"use client"
-
 import { CategoryFilter } from "@/components/Suggestion/CategoryFilter"
 import { FrontendMentor } from "@/components/Suggestion/FrontendMentor"
 import { RoadmapPreview } from "@/components/Suggestion/RoadmapPreview"
@@ -8,8 +6,6 @@ import { SidebarProvider } from "@/contexts/sidebar"
 import { SuggestionActions } from "@/components/Suggestion/SuggestionActions"
 import { CategoryProvider } from "@/contexts/categories"
 import SuggestionList from "@/components/Suggestion/SuggestionList"
-
-const roadmap = { planned: 3, in_progress: 2, live: 1 }
 
 const Home = () => {
     return (
@@ -24,7 +20,7 @@ const Home = () => {
                                     <Drawer>
                                         <div className="space-y-4">
                                             <CategoryFilter />
-                                            <RoadmapPreview roadmap={roadmap} />
+                                            <RoadmapPreview />
                                         </div>
                                     </Drawer>
                                 </div>
@@ -34,7 +30,7 @@ const Home = () => {
                             <CategoryFilter />
                         </div>
                         <div className="hidden sm:block">
-                            <RoadmapPreview roadmap={roadmap} />
+                            <RoadmapPreview />
                         </div>
                     </div>
                     <div className="lg:col-span-8">

@@ -8,6 +8,6 @@ interface Props {
     children: ReactNode
 }
 
-export const SWRContext = ({ children }: Props) => {
+export const SWRProvider = ({ children }: Props) => {
     return <SWRConfig value={{ fetcher }}>{children}</SWRConfig>
 }
