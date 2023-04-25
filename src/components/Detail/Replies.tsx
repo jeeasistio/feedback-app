@@ -17,9 +17,9 @@ export const Replies = ({ commentId }: Props) => {
     if (!replies) return <div>Something went wrong</div>
 
     return (
-        <div>
+        <div className="space-y-6">
             {replies.map((reply, i) => (
-                <div className="mb-6" key={i}>
+                <div key={i}>
                     <CommentContent
                         {...reply}
                         commentId={commentId}
