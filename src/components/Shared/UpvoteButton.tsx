@@ -29,7 +29,7 @@ export const UpvoteButton = ({
             method: "POST",
             body: JSON.stringify({ feedbackId, unupvote: false }),
         })
-        if (res.status === 200) {
+        if (res.ok) {
             setIsActive(!isActive)
             setUpvotesCount(upvotesCount + 1)
         }
@@ -39,7 +39,7 @@ export const UpvoteButton = ({
             method: "POST",
             body: JSON.stringify({ feedbackId, unupvote: true }),
         })
-        if (res.status === 200) {
+        if (res.ok) {
             setIsActive(!isActive)
             setUpvotesCount(upvotesCount - 1)
         }

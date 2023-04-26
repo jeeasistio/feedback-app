@@ -6,6 +6,14 @@ import useSWR from "swr"
 import { GetCommentsQueryResult } from "@/helpers/comment"
 import { useParams } from "next/navigation"
 
+const NoDataFallback = () => {
+    return (
+        <div className="mt-4">
+            <Typography color="gray">No Comments</Typography>
+        </div>
+    )
+}
+
 const LoadingFallback = () => {
     return (
         <div className="mt-4 space-y-8">
@@ -29,13 +37,13 @@ export const Comments = () => {
     return (
         <div className="sm: rounded-xl bg-white px-6 py-4 sm:p-8">
             <Typography variant="h3">
-                {comments && comments.length}{" "}
+                {(comments && comments.length) ?? 0}{" "}
                 {comments && comments.length > 1 ? "Comments" : "Comment"}
             </Typography>
 
             <div className="divide-y-2 divide-gray divide-opacity-10">
-                {comments && comments.length === 0 && <div>No Comments</div>}
                 {isLoading && <LoadingFallback />}
+                {comments && comments.length === 0 && <NoDataFallback />}
                 {comments?.map((comment, i) => (
                     <div className="py-4" key={i}>
                         <Comment key={comment.id} {...comment} />

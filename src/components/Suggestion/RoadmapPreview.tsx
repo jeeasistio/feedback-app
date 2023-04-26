@@ -12,9 +12,17 @@ const LoadingFallback = () => {
                 .fill(0)
                 .map((_, i) => (
                     <div key={i} className="animate-pulse">
-                        <div className="h-6 w-full rounded bg-gray-100"></div>
+                        <div className="h-6 w-full rounded bg-gray-100" />
                     </div>
                 ))}
+        </div>
+    )
+}
+
+const NoDataFallback = () => {
+    return (
+        <div>
+            <Typography color="gray">No Roadmaps</Typography>
         </div>
     )
 }
@@ -67,6 +75,7 @@ export const RoadmapPreview = () => {
 
                 <div className="space-y-2">
                     {isLoading && <LoadingFallback />}
+                    {feedbacks && feedbacks.length === 0 && <NoDataFallback />}
                     {roadmap &&
                         Object.entries(roadmap).map(([key, value]) => (
                             <div

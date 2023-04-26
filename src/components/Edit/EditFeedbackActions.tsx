@@ -1,3 +1,5 @@
+"use client"
+
 import { useRouter } from "next/navigation"
 import { Button } from "../Utils/Button"
 
@@ -8,9 +10,17 @@ interface Props {
 export const EditFeedbackActions = ({ feedbackId }: Props) => {
     const router = useRouter()
 
+    const handleDelete = async () => {
+        const res = await fetch(`/api/feedback?feedback_id=${feedbackId}`, {
+            method: "DELETE",
+        })
+
+        if (res.ok) router.push("/")
+    }
+
     return (
         <div className="flex flex-col justify-between gap-4 sm:flex-row">
-            <Button color="red" type="button">
+            <Button color="red" type="button" onClick={handleDelete}>
                 Delete
             </Button>
 

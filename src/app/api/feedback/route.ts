@@ -78,3 +78,10 @@ export const PUT = async (req: Request) => {
 
     return NextResponse.json({ message: "Feedback updated" })
 }
+
+export const DELETE = async (req: Request) => {
+    const { searchParams } = new URL(req.url)
+    const feedbackId = searchParams.get("feedback_id") as string
+    await prisma.feedback.delete({ where: { id: feedbackId } })
+    return NextResponse.json({ message: "Feedback deleted" })
+}

@@ -1,3 +1,5 @@
+"use client"
+
 import { GetFeedbacksQueryResult } from "@/helpers/feedback"
 import { CategoryName, StatusName } from "@prisma/client"
 import useSWR, { SWRResponse } from "swr"

@@ -116,7 +116,7 @@ model Feedback {
 
 model Upvote {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  Feedback   Feedback @relation(fields: [feedbackId], references: [id])
+  Feedback   Feedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   feedbackId String   @db.ObjectId
   AppUser    AppUser  @relation(fields: [appUserId], references: [id])
   appUserId  String   @db.ObjectId
@@ -131,14 +131,14 @@ model Reply {
   replyFromId String  @db.ObjectId
   To          AppUser @relation("ReplyTo", fields: [replyToId], references: [id])
   replyToId   String  @db.ObjectId
-  Comment     Comment @relation(fields: [commentId], references: [id])
+  Comment     Comment @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   commentId   String  @db.ObjectId
 }
 
 model Comment {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   content    String
-  Feedback   Feedback @relation(fields: [feedbackId], references: [id])
+  Feedback   Feedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   feedbackId String   @db.ObjectId
   From       AppUser  @relation(fields: [appUserId], references: [id])
   appUserId  String   @db.ObjectId

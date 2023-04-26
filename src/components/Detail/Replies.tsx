@@ -31,7 +31,6 @@ export const Replies = ({ commentId }: Props) => {
     return (
         <div className="space-y-8">
             {isLoading && <LoadingFallback />}
-            {replies && replies.length === 0 && <div>No Replies</div>}
             {replies?.map((reply, i) => (
                 <div key={i}>
                     <CommentContent
