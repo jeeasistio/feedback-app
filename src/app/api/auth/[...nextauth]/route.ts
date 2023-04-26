@@ -1,11 +1,17 @@
 import NextAuth, { AuthOptions } from "next-auth"
 import EmailProvider from "next-auth/providers/email"
+import GoogleProvider from "next-auth/providers/google"
 import { prisma } from "../../../../../prisma/client"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
+        GoogleProvider({
+            clientId:
+                "563219822802-27fnje64cagnk3lmgdrkv4kp8aq7c82e.apps.googleusercontent.com",
+            clientSecret: "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",
+        }),
         EmailProvider({
             server: {
                 host: process.env.EMAIL_SERVER_HOST,
