@@ -101,6 +101,8 @@ model Status {
 }
 
 model Feedback {
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   description    String
@@ -125,17 +127,21 @@ model Upvote {
 }
 
 model Reply {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   content     String
-  From        AppUser @relation("ReplyFrom", fields: [replyFromId], references: [id])
-  replyFromId String  @db.ObjectId
-  To          AppUser @relation("ReplyTo", fields: [replyToId], references: [id])
-  replyToId   String  @db.ObjectId
-  Comment     Comment @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  commentId   String  @db.ObjectId
+  From        AppUser  @relation("ReplyFrom", fields: [replyFromId], references: [id])
+  replyFromId String   @db.ObjectId
+  To          AppUser  @relation("ReplyTo", fields: [replyToId], references: [id])
+  replyToId   String   @db.ObjectId
+  Comment     Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  commentId   String   @db.ObjectId
 }
 
 model Comment {
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   content    String
   Feedback   Feedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade, onUpdate: Cascade)
