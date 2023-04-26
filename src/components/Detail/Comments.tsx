@@ -6,24 +6,37 @@ import useSWR from "swr"
 import { GetCommentsQueryResult } from "@/helpers/comment"
 import { useParams } from "next/navigation"
 
+const LoadingFallback = () => {
+    return (
+        <div className="mt-4 space-y-8">
+            {Array(3)
+                .fill(0)
+                .map((_, i) => (
+                    <div key={i} className="animate-pulse">
+                        <div className="h-24 w-full rounded bg-gray-100"></div>
+                    </div>
+                ))}
+        </div>
+    )
+}
+
 export const Comments = () => {
     const params = useParams()
     const { data: comments, isLoading } = useSWR<GetCommentsQueryResult>(
         `/api/comment?feedback_id=${params.feedback_id}`
     )
 
-    if (isLoading) return <div>Loading...</div>
-    if (comments && comments.length === 0) return <div>No Comments</div>
-    if (!comments) return <div>Something went wrong</div>
-
     return (
         <div className="sm: rounded-xl bg-white px-6 py-4 sm:p-8">
             <Typography variant="h3">
-                {comments.length} {comments.length > 1 ? "Comments" : "Comment"}
+                {comments && comments.length}{" "}
+                {comments && comments.length > 1 ? "Comments" : "Comment"}
             </Typography>
 
             <div className="divide-y-2 divide-gray divide-opacity-10">
-                {comments.map((comment, i) => (
+                {comments && comments.length === 0 && <div>No Comments</div>}
+                {isLoading && <LoadingFallback />}
+                {comments?.map((comment, i) => (
                     <div className="py-4" key={i}>
                         <Comment key={comment.id} {...comment} />
                     </div>

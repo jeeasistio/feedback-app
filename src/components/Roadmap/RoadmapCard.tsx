@@ -4,6 +4,7 @@ import { CommentCount } from "../Shared/CommentCount"
 import { UpvoteButton } from "../Shared/UpvoteButton"
 import { Typography } from "../Utils/Typography"
 import { roadmapMapping } from "./RoadmapList"
+import Link from "next/link"
 
 interface Props extends FeedbackQueryResult {}
 
@@ -41,9 +42,14 @@ export const RoadmapCard = ({
             </div>
 
             <div className="col-span-12">
-                <Typography variant="h3" className="mb-2">
-                    {title}
-                </Typography>
+                <Link href={`/detail/${id}`}>
+                    <Typography
+                        variant="h3"
+                        className="mb-2 hover:text-secondary"
+                    >
+                        {title}
+                    </Typography>
+                </Link>
                 <Typography className="mb-2" color="gray">
                     {description}
                 </Typography>

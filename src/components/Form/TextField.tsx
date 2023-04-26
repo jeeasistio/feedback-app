@@ -32,7 +32,7 @@ export const TextField = ({
     return (
         <>
             <Element
-                className={`rounded-md border bg-white-200 px-5 py-2 text-indigo outline-none  focus:border-secondary
+                className={`rounded-md border bg-white-200 px-5 py-3 text-indigo outline-none  focus:border-secondary
                 ${fullWidth && "w-full"}
                 ${error ? "border-red" : "border-transparent"} 
                 ${multiline && "resize-none"}

@@ -5,6 +5,20 @@ import { Typography } from "../Utils/Typography"
 import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
 import { useCategory } from "@/hooks/useCategory"
 
+const LoadingFallback = () => {
+    return (
+        <div className="space-y-4">
+            {Array(3)
+                .fill(0)
+                .map((_, i) => (
+                    <div key={i} className="animate-pulse">
+                        <div className="h-6 w-full rounded bg-gray-100"></div>
+                    </div>
+                ))}
+        </div>
+    )
+}
+
 const roadmapMapping: Record<string, { color: string }> = {
     Planned: {
         color: "orange",
@@ -26,7 +40,7 @@ const bgColor: Record<string, string> = {
 
 export const RoadmapPreview = () => {
     const { activeCat } = useCategory()
-    const { data: feedbacks } = useGetFeedbacks(activeCat.name)
+    const { data: feedbacks, isLoading } = useGetFeedbacks(activeCat.name)
 
     const roadmap = feedbacks?.reduce((acc, curr) => {
         if (curr.status in acc) {
@@ -52,6 +66,7 @@ export const RoadmapPreview = () => {
                 </div>
 
                 <div className="space-y-2">
+                    {isLoading && <LoadingFallback />}
                     {roadmap &&
                         Object.entries(roadmap).map(([key, value]) => (
                             <div

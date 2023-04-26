@@ -5,6 +5,20 @@ import { Typography } from "../Utils/Typography"
 import { RoadmapCard } from "./RoadmapCard"
 import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
 
+const LoadingFallback = () => {
+    return (
+        <div className="space-y-6">
+            {Array(3)
+                .fill(0)
+                .map((_, i) => (
+                    <div key={i} className="animate-pulse">
+                        <div className="h-52 w-full rounded bg-gray-100"></div>
+                    </div>
+                ))}
+        </div>
+    )
+}
+
 export const roadmapMapping: Record<
     string,
     {
@@ -52,9 +66,8 @@ export const RoadmapList = ({ status }: Props) => {
             </div>
 
             <div className="space-y-4">
-                {isLoading && <div>Loading...</div>}
+                {isLoading && <LoadingFallback />}
                 {feedbacks && feedbacks.length === 0 && <div>No Feedbacks</div>}
-                {!feedbacks && <div>Something went wrong</div>}
                 {feedbacks?.map((roadmap) => (
                     <div key={roadmap.title}>
                         <RoadmapCard {...roadmap} />

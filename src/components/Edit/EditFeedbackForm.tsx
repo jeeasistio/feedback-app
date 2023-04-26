@@ -13,6 +13,16 @@ import { useForm } from "react-hook-form"
 import { CategoryName, Feedback, StatusName } from "@prisma/client"
 import { useRouter } from "next/navigation"
 
+const FieldLoadingFallback = () => {
+    return (
+        <div className="mt-4 space-y-8">
+            <div className="animate-pulse">
+                <div className="h-12 w-full rounded bg-gray-100" />
+            </div>
+        </div>
+    )
+}
+
 interface Props extends FeedbackEditQueryResult {}
 
 interface EditFeedbackInputs {
@@ -30,8 +40,9 @@ export const EditFeedbackForm = ({
     status,
 }: Props) => {
     const router = useRouter()
-    const { allCategories } = useGetCategory()
-    const { allStatuses } = useGetStatus()
+    const { data: allCategories, isLoading: categoriesAreLoading } =
+        useGetCategory()
+    const { data: allStatuses } = useGetStatus()
     const { register, handleSubmit, watch, setValue } =
         useForm<EditFeedbackInputs>({
             defaultValues: { title, description, category, status },
@@ -78,18 +89,25 @@ export const EditFeedbackForm = ({
                         title="Category"
                         description="Choose a category for your feedback"
                         input={
-                            <Select
-                                fullWidth
-                                value={watch("category")}
-                                onChange={(cat: {
-                                    value: CategoryName
-                                    label: string
-                                }) => setValue("category", cat.value)}
-                                options={allCategories.map((cat) => ({
-                                    value: cat.name,
-                                    label: cat.label,
-                                }))}
-                            />
+                            <>
+                                {categoriesAreLoading && (
+                                    <FieldLoadingFallback />
+                                )}
+                                {allCategories && (
+                                    <Select
+                                        fullWidth
+                                        value={watch("category")}
+                                        onChange={(cat: {
+                                            value: CategoryName
+                                            label: string
+                                        }) => setValue("category", cat.value)}
+                                        options={allCategories.map((cat) => ({
+                                            value: cat.name,
+                                            label: cat.label,
+                                        }))}
+                                    />
+                                )}
+                            </>
                         }
                     />
                 </div>
@@ -99,18 +117,25 @@ export const EditFeedbackForm = ({
                         title="Update Status"
                         description="Change feedback state"
                         input={
-                            <Select
-                                fullWidth
-                                value={watch("status")}
-                                onChange={(status: {
-                                    value: StatusName
-                                    label: string
-                                }) => setValue("status", status.value)}
-                                options={allStatuses.map((status) => ({
-                                    value: status.name,
-                                    label: status.label,
-                                }))}
-                            />
+                            <>
+                                {categoriesAreLoading && (
+                                    <FieldLoadingFallback />
+                                )}
+                                {allStatuses && (
+                                    <Select
+                                        fullWidth
+                                        value={watch("status")}
+                                        onChange={(status: {
+                                            value: StatusName
+                                            label: string
+                                        }) => setValue("status", status.value)}
+                                        options={allStatuses.map((status) => ({
+                                            value: status.name,
+                                            label: status.label,
+                                        }))}
+                                    />
+                                )}
+                            </>
                         }
                     />
                 </div>

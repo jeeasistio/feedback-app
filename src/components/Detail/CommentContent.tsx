@@ -1,7 +1,10 @@
+"use state"
+
 import Image from "next/image"
 import { Typography } from "../Utils/Typography"
 import { ReplyForm } from "./ReplyForm"
 import { AppUser, Comment, Reply } from "@prisma/client"
+import { useState } from "react"
 
 interface Props {
     commentId: Comment["id"]
@@ -16,6 +19,11 @@ export const CommentContent = ({
     from,
     replyingTo,
 }: Props) => {
+    const [isReplying, setIsReplying] = useState(false)
+    const handleReply = () => {
+        setIsReplying((prev) => !prev)
+    }
+
     return (
         <div className="grid grid-cols-12 items-center space-y-1 sm:space-y-2">
             <Image
@@ -32,7 +40,10 @@ export const CommentContent = ({
                 </Typography>
             </div>
             <div className="col-span-2 ml-auto sm:col-span-1">
-                <button className="decoration-secondary hover:underline">
+                <button
+                    className="decoration-secondary hover:underline"
+                    onClick={handleReply}
+                >
                     <Typography variant="body3" color="secondary">
                         Reply
                     </Typography>
@@ -40,7 +51,7 @@ export const CommentContent = ({
             </div>
             <div className="sm:col-span-1" />
             <div className="col-span-12 sm:col-span-11 sm:ml-4 lg:ml-0">
-                <Typography variant="body2" color="gray">
+                <Typography variant="body2" color="gray" className="mt-2">
                     {replyingTo && (
                         <span className="font-bold text-primary">
                             @{from.username}&nbsp;
@@ -49,9 +60,11 @@ export const CommentContent = ({
                     {content}
                 </Typography>
 
-                <div className="mt-4">
-                    <ReplyForm commentId={commentId} replyToId={from.id} />
-                </div>
+                {isReplying && (
+                    <div className="mt-8">
+                        <ReplyForm commentId={commentId} replyToId={from.id} />
+                    </div>
+                )}
             </div>
         </div>
     )

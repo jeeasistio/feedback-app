@@ -11,6 +11,16 @@ import { NewFeedbackActions } from "./NewFeedbackActions"
 import { useGetCategory } from "@/hooks/useGetCategories"
 import { useRouter } from "next/navigation"
 
+const FieldLoadingFallback = () => {
+    return (
+        <div className="mt-4 space-y-8">
+            <div className="animate-pulse">
+                <div className="h-12 w-full rounded bg-gray-100" />
+            </div>
+        </div>
+    )
+}
+
 interface NewFeedbackInputs {
     title: Feedback["title"]
     description: Feedback["description"]
@@ -25,7 +35,7 @@ const initialFormValues: NewFeedbackInputs = {
 
 export const NewFeedbackForm = () => {
     const router = useRouter()
-    const { allCategories } = useGetCategory()
+    const { data: allCategories, isLoading } = useGetCategory()
     const { register, handleSubmit, watch, setValue } =
         useForm<NewFeedbackInputs>({ defaultValues: initialFormValues })
     const onSubmit: SubmitHandler<NewFeedbackInputs> = async (data) => {
@@ -71,18 +81,23 @@ export const NewFeedbackForm = () => {
                         title="Category"
                         description="Choose a category for your feedback"
                         input={
-                            <Select
-                                fullWidth
-                                value={watch("category")}
-                                onChange={(cat: {
-                                    value: CategoryName
-                                    label: string
-                                }) => setValue("category", cat.value)}
-                                options={allCategories.map((cat) => ({
-                                    value: cat.name,
-                                    label: cat.label,
-                                }))}
-                            />
+                            <>
+                                {isLoading && <FieldLoadingFallback />}
+                                {allCategories && (
+                                    <Select
+                                        fullWidth
+                                        value={watch("category")}
+                                        onChange={(cat: {
+                                            value: CategoryName
+                                            label: string
+                                        }) => setValue("category", cat.value)}
+                                        options={allCategories.map((cat) => ({
+                                            value: cat.name,
+                                            label: cat.label,
+                                        }))}
+                                    />
+                                )}
+                            </>
                         }
                     />
                 </div>

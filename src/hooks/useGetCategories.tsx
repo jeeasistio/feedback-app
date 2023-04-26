@@ -2,21 +2,16 @@
 
 import { ALLCATEGORY, CategoryAll } from "@/helpers/category"
 import { Category } from "@prisma/client"
-import { useEffect, useState } from "react"
+import useSWR from "swr"
 
 export const useGetCategory = (withAll: boolean = false) => {
-    const [allCategories, setAllCategories] = useState<
-        (Category | CategoryAll)[]
-    >([])
+    const res = useSWR<(Category | CategoryAll)[]>("/api/category")
 
-    useEffect(() => {
-        const getCategories = async () => {
-            const res = await fetch("/api/category")
-            const data = await res.json()
-            setAllCategories(withAll ? [ALLCATEGORY].concat(data) : data)
-        }
-        getCategories()
-    }, [withAll])
-
-    return { allCategories }
+    return {
+        ...res,
+        data:
+            withAll && res.data !== undefined
+                ? ([ALLCATEGORY] as (Category | CategoryAll)[]).concat(res.data)
+                : res.data,
+    }
 }

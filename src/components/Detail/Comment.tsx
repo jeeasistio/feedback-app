@@ -7,8 +7,8 @@ interface Props extends CommentQueryResult {}
 export const Comment = (props: Props) => {
     return (
         <div>
-            <div className="mb-4">
-                <CommentContent {...props} />
+            <div className="mb-8">
+                <CommentContent commentId={props.id} {...props} />
             </div>
 
             <div className="grid grid-cols-12 gap-6">
