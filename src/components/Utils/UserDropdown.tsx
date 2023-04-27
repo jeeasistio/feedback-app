@@ -2,9 +2,9 @@
 
 import { useClickOutside } from "@/hooks/useClickOutside"
 import { signIn, signOut, useSession } from "next-auth/react"
-import Image from "next/image"
 import { useRef, useState } from "react"
 import { Typography } from "./Typography"
+import { ProfileAvatar } from "../Shared/ProfileAvatar"
 
 export const UserDropdown = () => {
     const session = useSession()
@@ -17,23 +17,13 @@ export const UserDropdown = () => {
     return (
         <div ref={ref} className="relative">
             <button onClick={handleOpen}>
-                {session.status === "authenticated" ? (
-                    <Image
-                        className="rounded-full bg-white"
-                        src={session.data.user.image}
-                        alt="profile-picture"
-                        width={40}
-                        height={40}
-                    />
-                ) : (
-                    <Image
-                        className="rounded-full bg-white"
-                        src={"/user-images/no-profile.jpg"}
-                        alt="profile-picture"
-                        width={40}
-                        height={40}
-                    />
-                )}
+                <ProfileAvatar
+                    src={
+                        session.status === "authenticated"
+                            ? session.data.user.image
+                            : "/user-images/no-profile.jpg"
+                    }
+                />
             </button>
             {open && (
                 <ul className="absolute right-0 top-[100%] z-10 flex w-max cursor-pointer flex-col divide-y divide-indigo divide-opacity-20 rounded-xl bg-white drop-shadow-xl">

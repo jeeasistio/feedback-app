@@ -68,14 +68,18 @@ export const getReplies = async (
     }))
 }
 
-export const createComment = async (comment: Omit<Comment, "id">) => {
+export const createComment = async (
+    comment: Omit<Comment, "id" | "created_at" | "updated_at">
+) => {
     const newComment = await prisma.comment.create({
         data: comment,
     })
     return newComment
 }
 
-export const createReply = async (reply: Omit<Reply, "id">) => {
+export const createReply = async (
+    reply: Omit<Reply, "id" | "created_at" | "updated_at">
+) => {
     const newReply = await prisma.reply.create({
         data: reply,
     })

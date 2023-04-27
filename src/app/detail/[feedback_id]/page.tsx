@@ -1,9 +1,11 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { AddCommentForm } from "@/components/Detail/AddCommentForm"
 import { Comments } from "@/components/Detail/Comments"
 import { DetailActions } from "@/components/Detail/DetailActions"
 import { FeedbackCard } from "@/components/Shared/FeedbackCard"
 import { getFeedbacks } from "@/helpers/feedback"
 import { Feedback } from "@prisma/client"
+import { getServerSession } from "next-auth"
 
 const fetchFeedback = async (feedbackId: Feedback["id"]) => {
     const feedbacks = await getFeedbacks(undefined, undefined, feedbackId)
@@ -18,6 +20,7 @@ interface Props {
 
 const Detail = async ({ params }: Props) => {
     const feedback = await fetchFeedback(params.feedback_id)
+    const session = await getServerSession(authOptions)
 
     return (
         <main className="container my-8 max-w-screen-lg space-y-6 px-4">
@@ -30,9 +33,11 @@ const Detail = async ({ params }: Props) => {
             <div>
                 <Comments />
             </div>
-            <div>
-                <AddCommentForm feedbackId={feedback.id} />
-            </div>
+            {session?.user && (
+                <div>
+                    <AddCommentForm feedbackId={feedback.id} />
+                </div>
+            )}
         </main>
     )
 }

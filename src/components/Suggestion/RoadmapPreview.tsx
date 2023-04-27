@@ -1,23 +1,6 @@
-"use client"
-
 import Link from "next/link"
 import { Typography } from "../Utils/Typography"
-import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
-import { useCategory } from "@/hooks/useCategory"
-
-const LoadingFallback = () => {
-    return (
-        <div className="space-y-4">
-            {Array(3)
-                .fill(0)
-                .map((_, i) => (
-                    <div key={i} className="animate-pulse">
-                        <div className="h-6 w-full rounded bg-gray-100" />
-                    </div>
-                ))}
-        </div>
-    )
-}
+import { getRoadmaps } from "@/helpers/feedback"
 
 const NoDataFallback = () => {
     return (
@@ -46,18 +29,10 @@ const bgColor: Record<string, string> = {
     blue: "bg-blue",
 }
 
-export const RoadmapPreview = () => {
-    const { activeCat } = useCategory()
-    const { data: feedbacks, isLoading } = useGetFeedbacks(activeCat.name)
+const fetch = async () => await getRoadmaps()
 
-    const roadmap = feedbacks?.reduce((acc, curr) => {
-        if (curr.status in acc) {
-            acc[curr.status] += 1
-        } else {
-            acc[curr.status] = 1
-        }
-        return acc
-    }, {} as Record<string, number>)
+export const RoadmapPreview = async () => {
+    const roadmap = await fetch()
 
     return (
         <div className="flex flex-wrap items-center gap-2 rounded-xl bg-white p-4 sm:max-lg:h-full">
@@ -74,8 +49,7 @@ export const RoadmapPreview = () => {
                 </div>
 
                 <div className="space-y-2">
-                    {isLoading && <LoadingFallback />}
-                    {feedbacks && feedbacks.length === 0 && <NoDataFallback />}
+                    {Object.keys(roadmap).length === 0 && <NoDataFallback />}
                     {roadmap &&
                         Object.entries(roadmap).map(([key, value]) => (
                             <div

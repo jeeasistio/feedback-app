@@ -111,7 +111,7 @@ export const NewFeedbackForm = () => {
                                 fullWidth
                                 multiline
                                 placeholder="Type your description here"
-                                register={register("title")}
+                                register={register("description")}
                             />
                         }
                     />

@@ -7,7 +7,7 @@ export const DrawerAuthActions = () => {
     const session = useSession()
     return (
         <div>
-            {session.status === "authenticated" ? (
+            {session.status !== "authenticated" ? (
                 <Button fullWidth color="secondary" onClick={() => signIn()}>
                     Sign in
                 </Button>

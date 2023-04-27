@@ -21,6 +21,7 @@ const Home = () => {
                                     <Drawer>
                                         <div className="space-y-4">
                                             <CategoryFilter />
+                                            {/* @ts-expect-error Server Component */}
                                             <RoadmapPreview />
                                             <DrawerAuthActions />
                                         </div>
@@ -32,6 +33,7 @@ const Home = () => {
                             <CategoryFilter />
                         </div>
                         <div className="hidden sm:block">
+                            {/* @ts-expect-error Server Component */}
                             <RoadmapPreview />
                         </div>
                     </div>

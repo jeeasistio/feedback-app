@@ -7,7 +7,7 @@ import { useCategory } from "@/hooks/useCategory"
 
 export const SuggestionCount = () => {
     const { activeCat } = useCategory()
-    const { data: feedbacks } = useGetFeedbacks(activeCat.name)
+    const { data: feedbacks } = useGetFeedbacks(activeCat.name, "SUGGESTION")
 
     return (
         <div className="hidden items-center gap-4 sm:flex">

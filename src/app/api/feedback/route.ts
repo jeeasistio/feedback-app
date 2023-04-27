@@ -8,6 +8,7 @@ import {
 import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]/route"
 import { CategoryName, StatusName } from "@prisma/client"
+import { checkIfAuthenticated } from "@/helpers/checkIfAuthenticated"
 
 export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url)
@@ -34,6 +35,8 @@ export const GET = async (req: Request) => {
 export const POST = async (req: Request) => {
     const { title, description, category } = await req.json()
     const session = await getServerSession(authOptions)
+    const userId = session?.user.id
+    if (!userId) throw new Error("User not found")
     const foundCategory = await prisma.category.findFirstOrThrow({
         where: { name: category },
         select: { id: true },
@@ -43,9 +46,7 @@ export const POST = async (req: Request) => {
         select: { id: true },
     })
 
-    const userId = session?.user.id
     if (!title && !description) throw new Error("Missing title or description")
-    if (!userId) throw new Error("User not found")
     await createFeedback({
         title,
         description,
@@ -57,6 +58,7 @@ export const POST = async (req: Request) => {
 }
 
 export const PUT = async (req: Request) => {
+    checkIfAuthenticated()
     const { id, title, description, category, status } = await req.json()
 
     const foundCategory = await prisma.category.findFirstOrThrow({
@@ -80,6 +82,7 @@ export const PUT = async (req: Request) => {
 }
 
 export const DELETE = async (req: Request) => {
+    checkIfAuthenticated()
     const { searchParams } = new URL(req.url)
     const feedbackId = searchParams.get("feedback_id") as string
     await prisma.feedback.delete({ where: { id: feedbackId } })

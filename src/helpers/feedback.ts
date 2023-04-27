@@ -96,17 +96,39 @@ export const getFeedbacks = async (
     }))
 }
 
-export const createFeedback = async (feedback: Omit<Feedback, "id">) => {
-    const plannedStatus = await prisma.status.findFirstOrThrow({
-        where: { name: "PLANNED" },
+type RoadmapPreview = Record<string, number>
+
+export const getRoadmaps = async (): Promise<RoadmapPreview> => {
+    const roadmap = await prisma.feedback.groupBy({
+        where: { Status: { name: { not: "SUGGESTION" } } },
+        by: ["statusId"],
+        _count: true,
+    })
+
+    const statuses = await prisma.status.findMany({
+        select: { id: true, label: true },
+    })
+
+    return roadmap.reduce((acc, r) => {
+        const status = statuses.find((s) => s.id === r.statusId)
+        if (!status) throw new Error("Status not found")
+        return { ...acc, [status.label]: r._count }
+    }, {} as RoadmapPreview)
+}
+
+export const createFeedback = async (
+    feedback: Omit<Feedback, "id" | "created_at" | "updated_at">
+) => {
+    const suggestionStatus = await prisma.status.findFirstOrThrow({
+        where: { name: "SUGGESTION" },
     })
     await prisma.feedback.create({
-        data: { ...feedback, statusId: plannedStatus.id },
+        data: { ...feedback, statusId: suggestionStatus.id },
     })
 }
 
 export const updateFeedback = async (
-    feedback: Omit<Feedback, "feedbackFromId">
+    feedback: Omit<Feedback, "feedbackFromId" | "created_at" | "updated_at">
 ) => {
     await prisma.feedback.update({
         where: { id: feedback.id },

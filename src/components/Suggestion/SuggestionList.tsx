@@ -44,7 +44,10 @@ const LoadingFallback = () => {
 
 const SuggestionList = () => {
     const { activeCat } = useCategory()
-    const { data: feedbacks, isLoading } = useGetFeedbacks(activeCat.name)
+    const { data: feedbacks, isLoading } = useGetFeedbacks(
+        activeCat.name,
+        "SUGGESTION"
+    )
 
     if (isLoading) return <LoadingFallback />
     if (feedbacks && feedbacks.length === 0) return <NoDataFallback />
