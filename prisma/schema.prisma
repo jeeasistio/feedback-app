@@ -62,7 +62,7 @@ model AppUser {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
   User         User       @relation(fields: [userId], references: [id])
   name         String
-  image        String?
+  image        String
   userId       String     @db.ObjectId
   username     String
   Comment      Comment[]

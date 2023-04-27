@@ -1,4 +1,5 @@
 import { AddFeedbackButton } from "../Shared/AddFeedbackButton"
+import { UserDropdown } from "../Utils/UserDropdown"
 import { SortDropdown } from "./SortDropdown"
 import { SuggestionCount } from "./SuggestionCount"
 
@@ -9,7 +10,12 @@ export const SuggestionActions = () => {
                 <SuggestionCount />
                 <SortDropdown />
             </div>
-            <AddFeedbackButton />
+            <div className="flex items-center gap-4">
+                <AddFeedbackButton />
+                <div className="hidden sm:block">
+                    <UserDropdown />
+                </div>
+            </div>
         </div>
     )
 }

@@ -23,7 +23,7 @@ export const Drawer = ({ children }: Props) => {
     if (!open) return null
 
     return (
-        <div className="absolute top-0 h-screen w-screen bg-[rgba(0,0,0,0.5)]">
+        <div className="absolute top-0 z-10 h-screen w-screen bg-[rgba(0,0,0,0.5)]">
             <div className="ml-auto h-full w-64 bg-white-200 p-4" ref={ref}>
                 {children}
             </div>

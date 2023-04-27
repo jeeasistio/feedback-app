@@ -27,11 +27,11 @@ export const CommentContent = ({
     return (
         <div className="grid grid-cols-12 items-center space-y-1 sm:space-y-2">
             <Image
-                className="col-span-2 rounded-full sm:col-span-1"
+                className="col-span-2 rounded-full sm:col-span-1 bg-gray"
                 src={from.image ?? "/user-images/no-profile.jpg"}
                 alt="profile-image"
-                width={40}
-                height={40}
+                width={30}
+                height={30}
             />
             <div className="col-span-8 ml-4 sm:col-span-10 lg:ml-0">
                 <Typography variant="h4">{from.name}</Typography>

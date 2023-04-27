@@ -6,6 +6,7 @@ import { SidebarProvider } from "@/contexts/sidebar"
 import { SuggestionActions } from "@/components/Suggestion/SuggestionActions"
 import { CategoryProvider } from "@/contexts/categories"
 import SuggestionList from "@/components/Suggestion/SuggestionList"
+import { DrawerAuthActions } from "@/components/Suggestion/DrawerAuthActions"
 
 const Home = () => {
     return (
@@ -21,6 +22,7 @@ const Home = () => {
                                         <div className="space-y-4">
                                             <CategoryFilter />
                                             <RoadmapPreview />
+                                            <DrawerAuthActions />
                                         </div>
                                     </Drawer>
                                 </div>

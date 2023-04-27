@@ -8,9 +8,8 @@ export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
-            clientId:
-                "563219822802-27fnje64cagnk3lmgdrkv4kp8aq7c82e.apps.googleusercontent.com",
-            clientSecret: "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",
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
         EmailProvider({
             server: {
@@ -47,12 +46,15 @@ export const authOptions: AuthOptions = {
                 image: string
             }[]
             const name =
+                user.name ??
                 randomData[Math.floor(Math.random() * randomData.length) + 1]
                     .full_name
             const username =
+                user.email?.split("@")[0] ??
                 randomData[Math.floor(Math.random() * randomData.length) + 1]
                     .username
             const image =
+                user.image ??
                 randomData[Math.floor(Math.random() * randomData.length) + 1]
                     .image
 
