@@ -15,7 +15,7 @@ export const UserDropdown = () => {
     useClickOutside(ref, () => setOpen(false))
 
     return (
-        <div ref={ref} className="relative">
+        <div ref={ref} className="relative flex items-center">
             <button onClick={handleOpen}>
                 <ProfileAvatar
                     src={

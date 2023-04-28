@@ -4,10 +4,17 @@ import Image from "next/image"
 import { Typography } from "../Utils/Typography"
 import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
 import { useCategory } from "@/hooks/useCategory"
+import { useSort } from "@/hooks/useSort"
 
 export const SuggestionCount = () => {
     const { activeCat } = useCategory()
-    const { data: feedbacks } = useGetFeedbacks(activeCat.name, "SUGGESTION")
+    const { sortBy, orderBy } = useSort()
+    const { data: feedbacks } = useGetFeedbacks({
+        category: activeCat.name,
+        status: "SUGGESTION",
+        sortBy,
+        orderBy,
+    })
 
     return (
         <div className="hidden items-center gap-4 sm:flex">

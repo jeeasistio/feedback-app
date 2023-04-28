@@ -24,6 +24,9 @@ export const getComments = async (
                 },
             },
         },
+        orderBy: {
+            created_at: "desc",
+        },
     })
     return comments.map((comment) => ({
         ...comment,
@@ -60,6 +63,9 @@ export const getReplies = async (
                 },
             },
         },
+        orderBy: {
+            created_at: "asc",
+        }
     })
     return replies.map((reply) => ({
         ...reply,

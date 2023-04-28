@@ -49,11 +49,19 @@ export interface FeedbackQueryResult
 
 export type GetFeedbacksQueryResult = FeedbackQueryResult[]
 
-export const getFeedbacks = async (
-    categoryId?: Category["id"],
-    statusId?: Status["id"],
+export const getFeedbacks = async ({
+    categoryId,
+    statusId,
+    feedbackId,
+    sortBy = "upvotes",
+    order = "desc",
+}: {
+    categoryId?: Category["id"]
+    statusId?: Status["id"]
     feedbackId?: Feedback["id"]
-): Promise<GetFeedbacksQueryResult> => {
+    sortBy?: "upvotes" | "comments"
+    order?: "asc" | "desc"
+}): Promise<GetFeedbacksQueryResult> => {
     const feedbacks = await prisma.feedback.findMany({
         where: { id: feedbackId, categoryId, statusId },
         select: {
@@ -81,6 +89,20 @@ export const getFeedbacks = async (
                     Upvote: true,
                 },
             },
+        },
+        orderBy: {
+            Upvote:
+                sortBy === "upvotes"
+                    ? {
+                          _count: order,
+                      }
+                    : undefined,
+            Comment:
+                sortBy === "comments"
+                    ? {
+                          _count: order,
+                      }
+                    : undefined,
         },
     })
 

@@ -45,15 +45,30 @@ export const UpvoteButton = ({
         }
     }
 
+    const isDisabled = session.status !== "authenticated"
+
     return (
         <button
-            onClick={isActive ? handleUnupvote : handleUpvote}
-            className={`flex w-max min-w-[40px] cursor-pointer flex-row items-center gap-2 rounded-lg px-2 py-1 hover:bg-gray-100 ${
+            disabled={!session?.data?.user}
+            onClick={
+                isDisabled
+                    ? undefined
+                    : isActive
+                    ? handleUnupvote
+                    : handleUpvote
+            }
+            className={`flex w-max min-w-[40px] flex-row items-center gap-2 rounded-lg px-2 py-1 ${
                 orientation === "horizontal"
                     ? "flex-row"
                     : "flex-row sm:flex-col sm:py-2"
             }
-            ${isActive ? "bg-secondary" : "bg-white-100"}`}
+            ${
+                isDisabled
+                    ? "bg-slate-200"
+                    : isActive
+                    ? "cursor-pointer bg-secondary hover:bg-gray-100"
+                    : "cursor-pointer bg-white-100 hover:bg-gray-100"
+            }`}
         >
             {isActive ? (
                 <Image

@@ -6,6 +6,7 @@ import { useGetFeedbacks } from "@/hooks/useGetFeedbacks"
 import Image from "next/image"
 import { Typography } from "../Utils/Typography"
 import { AddFeedbackButton } from "../Shared/AddFeedbackButton"
+import { useSort } from "@/hooks/useSort"
 
 const NoDataFallback = () => {
     return (
@@ -44,10 +45,13 @@ const LoadingFallback = () => {
 
 const SuggestionList = () => {
     const { activeCat } = useCategory()
-    const { data: feedbacks, isLoading } = useGetFeedbacks(
-        activeCat.name,
-        "SUGGESTION"
-    )
+    const { sortBy, orderBy } = useSort()
+    const { data: feedbacks, isLoading } = useGetFeedbacks({
+        category: activeCat.name,
+        status: "SUGGESTION",
+        sortBy,
+        orderBy,
+    })
 
     if (isLoading) return <LoadingFallback />
     if (feedbacks && feedbacks.length === 0) return <NoDataFallback />

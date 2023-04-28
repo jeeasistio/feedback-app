@@ -8,7 +8,7 @@ import { Feedback } from "@prisma/client"
 import { getServerSession } from "next-auth"
 
 const fetchFeedback = async (feedbackId: Feedback["id"]) => {
-    const feedbacks = await getFeedbacks(undefined, undefined, feedbackId)
+    const feedbacks = await getFeedbacks({ feedbackId })
     return feedbacks[0]
 }
 

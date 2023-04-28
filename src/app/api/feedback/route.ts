@@ -9,10 +9,13 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]/route"
 import { CategoryName, StatusName } from "@prisma/client"
 import { checkIfAuthenticated } from "@/helpers/checkIfAuthenticated"
+import { OrderOption, SortOption } from "@/contexts/sort"
 
 export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url)
     const category = searchParams.get("category") as CategoryName | "All"
+    const sortBy = searchParams.get("sortBy") as SortOption
+    const orderBy = searchParams.get("orderBy") as OrderOption
     const foundCategory =
         category !== "All"
             ? await prisma.category.findFirstOrThrow({
@@ -28,7 +31,12 @@ export const GET = async (req: Request) => {
                   select: { id: true },
               })
             : undefined
-    const feedbacks = await getFeedbacks(foundCategory?.id, foundStatus?.id)
+    const feedbacks = await getFeedbacks({
+        categoryId: foundCategory?.id,
+        statusId: foundStatus?.id,
+        sortBy,
+        order: orderBy,
+    })
     return NextResponse.json(feedbacks)
 }
 

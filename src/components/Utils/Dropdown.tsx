@@ -7,16 +7,17 @@ import Image from "next/image"
 
 interface Props {
     options: string[]
+    value: string
     label: string
+    handleChange: (value: any) => void
 }
 
-export const Dropdown = ({ options, label }: Props) => {
+export const Dropdown = ({ options, label, value, handleChange }: Props) => {
     const [open, setOpen] = useState(false)
-    const [selected, setSelected] = useState(options[0])
     const ref = useRef<HTMLDivElement>(null)
     const handleOpen = () => setOpen(!open)
     const handleSelect = (option: string) => {
-        setSelected(option)
+        handleChange(option)
         setOpen(false)
     }
 
@@ -33,7 +34,7 @@ export const Dropdown = ({ options, label }: Props) => {
                         {label} :
                     </Typography>
                     <Typography variant="h4" color="white">
-                        {selected}
+                        {value}
                     </Typography>
                     {open ? (
                         <Image
@@ -62,7 +63,7 @@ export const Dropdown = ({ options, label }: Props) => {
                             key={option}
                         >
                             <Typography color="inherit">{option}</Typography>
-                            {option === selected && (
+                            {option === value && (
                                 <Image
                                     src="/shared/icon-check.svg"
                                     alt="check-icon"

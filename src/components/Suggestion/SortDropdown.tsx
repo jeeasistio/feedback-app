@@ -1,15 +1,17 @@
+"use client"
+
+import { useSort } from "@/hooks/useSort"
 import { Dropdown } from "../Utils/Dropdown"
+import { sortMapping } from "@/contexts/sort"
 
 export const SortDropdown = () => {
+    const { handleChange, label } = useSort()
     return (
         <div>
             <Dropdown
-                options={[
-                    "Most Upvotes",
-                    "Least Upvotes",
-                    "Most Comments",
-                    "Least Comments",
-                ]}
+                handleChange={handleChange}
+                value={label}
+                options={Object.keys(sortMapping)}
                 label="Sort by"
             />
         </div>

@@ -72,10 +72,9 @@ interface Props {
 }
 
 export const RoadmapList = ({ status }: Props) => {
-    const { data: feedbacks, isLoading } = useGetFeedbacks(
-        undefined,
-        roadmapMapping[status].status
-    )
+    const { data: feedbacks, isLoading } = useGetFeedbacks({
+        status: roadmapMapping[status].status,
+    })
 
     return (
         <div>

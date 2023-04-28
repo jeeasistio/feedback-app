@@ -54,7 +54,7 @@ export const CommentContent = ({
                 <Typography variant="body2" color="gray" className="mt-2">
                     {replyingTo && (
                         <span className="font-bold text-primary">
-                            @{from.username}&nbsp;
+                            @{replyingTo}&nbsp;
                         </span>
                     )}
                     {content}

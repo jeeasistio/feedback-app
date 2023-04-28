@@ -40,7 +40,9 @@ export const ReplyForm = ({ commentId, replyToId }: Props) => {
                 />
             </div>
             <div>
-                <Button fullWidth>Post Reply</Button>
+                <Button fullWidth type="submit">
+                    Post Reply
+                </Button>
             </div>
         </form>
     )
