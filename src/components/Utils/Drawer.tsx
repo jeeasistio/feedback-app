@@ -18,6 +18,9 @@ export const Drawer = ({ children }: Props) => {
         } else {
             document.body.style.overflow = "unset"
         }
+        return () => {
+            document.body.style.overflow = "unset"
+        }
     }, [open])
 
     if (!open) return null
